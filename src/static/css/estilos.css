@@ -6,7 +6,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh; 
-    background: linear-gradient(to bottom, #2980b9, #1e416e);
+    background: radial-gradient(circle, #2980b9, #1e416e);
     color: #000;
 }
 
@@ -91,6 +91,35 @@ body {
     color: #f5f5f5; 
 }
 
+
+
+/* Estilos de pantalla 404 */
+.contenedor_404 {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    margin-top: 20px;
+    flex-grow: 1; 
+    height: 100%;
+}
+
+.area_404 {
+    flex-basis: 100%;
+    padding: 10px;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    text-align: center;
+    overflow: hidden;
+}
+
+
+
+
 /* Estilos para pantallas pequeñas */
 @media screen and (max-width: 768px) {
     .contenedor {
@@ -98,6 +127,14 @@ body {
     }
     
     .area_1, .area_2 {
+        flex-basis: 100%;
+    }
+
+    .contenedor_404 {
+        flex-direction: column;
+    }
+
+    .area_404 {
         flex-basis: 100%;
     }
 }
