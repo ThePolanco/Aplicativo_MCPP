@@ -118,6 +118,50 @@ body {
 }
 
 
+/* Estilos de pantalla prueba */
+.contenedor_test {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    flex-grow: 1;
+    height: 100%;
+}
+
+.area_subir,
+.muestra {
+    flex-basis: calc(50% - 10px);
+    padding: 10px;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Estilos de encabezados */
+h2 {
+    font-size: 20px;
+    margin-top: 0;
+}
+
+/* Estilos para la imagen de ejemplo */
+.ejemplo {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+
+/* Cambio de color al pasar el ratón por encima */
+.carga_archivo:hover {
+    background-color: #2980b9; 
+}
+
+
 
 
 /* Estilos para pantallas pequeñas */
