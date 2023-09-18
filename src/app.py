@@ -9,6 +9,16 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+# Ruta para la pantalla de probar modelo
+@app.route('/prueba')
+def prueba():
+    return render_template('prueba.html')
+
+#Ruta para la pantalla de datos
+@app.route('/datos')
+def datos():
+    return render_template('datos.html')
+
 # Control del error 404
 def error_404(error):
     return render_template('error_404.html'), 404
