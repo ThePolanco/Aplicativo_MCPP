@@ -19,8 +19,21 @@
             <div class="area_subir">
                 <section>
                     <h2>Carga tu archivo con extensión csv</h2>
-                    <input class="carga_archivo" type="file">
+                    <!--Con el atributo accept para recibir solo archivos de tipo csv-->
+                    <input class="carga_archivo" type="file" accept=".csv">
                 </section>
+            </div>
+            <div class="area_subir">
+                <h2>Selecciona los porcentajes de prueba y entrenamiento</h2>
+                <form>
+                    <label for="porcentaje1">Entrenamiento:</label>
+                    <input type="number" id="porcentaje1" name="porcentaje1" min="0" max="100" step="1"> %
+                    <br>
+                    <label for="porcentaje2">Prueba:</label>
+                    <input type="number" id="porcentaje2" name="porcentaje2" min="0" max="100" step="1"> %
+                    <br><br>
+                    <input type="submit" value="Enviar">
+                </form>
             </div>
             <div class="muestra">
                 <section>
