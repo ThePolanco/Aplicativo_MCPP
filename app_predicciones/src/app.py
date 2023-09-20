@@ -3,7 +3,8 @@ import os
 from flask import Flask, render_template, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
-
+from config import *
+from precipitacion import Precipitacion
 #
 
 
@@ -196,12 +197,14 @@ def procesoAlgoritmo():
 
 
 #*****************************************************************************************************************************************************************************************************
-
+con_bd = Conexion()
 #Ruta para la pantalla de datos
 @app.route('/datos')
 def datos():
-    return render_template('datos.html')
-
+    # Se modifica la vista datos para poder hacer el muestreo de los datos
+    precipitaciones = con_bd['Datos']
+    PrecipitacionesRegistradas=precipitaciones.find()
+    return render_template('datos.html', precipitaciones = PrecipitacionesRegistradas)
 
 # Control del error 404
 def error_404(error):

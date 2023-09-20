@@ -20,11 +20,29 @@
                 <article>
                     <section class="zona_historico">
                         <h2 class="titulo">Datos historicos de predicciones</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non suscipit fuga omnis exercitationem excepturi! Harum repudiandae iusto consectetur doloribus enim inventore commodi quae minus, ad delectus porro, laboriosam velit culpa.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam eum nemo explicabo nobis ut totam nulla earum possimus quas, quo unde ea, voluptatum expedita iste voluptatem impedit odio consectetur soluta?
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente voluptatibus ab consequatur voluptatum deleniti velit voluptas quisquam repellendus, quasi fugiat porro, magni qui deserunt ratione eaque? Aspernatur asperiores iure recusandae!
-                        </p>
+                        <h1>BIENVENIDO</h1>
+                        <h2>* Visualización de datos en Año/Mes/Día </h2>
+                        
+                        <!--
+                            Se utiliza jinja2 para hacer la visualización y correspondiente actualización de los datos mediante un for que recorra todas nuestras colecciones
+                        -->
+                    
+                        {%for precipitacion in precipitaciones %}
+                    
+                        <li>
+                            <h2></h2> 
+                            Fecha:  {{precipitacion.fecha}} <br>
+                            Hora:  {{precipitacion.hora}}<br>
+                            Po:  {{precipitacion.Po}}<br>
+                            T:  {{precipitacion.T}}<br>
+                            U:  {{precipitacion.U}}<br>
+                            Ff:  {{precipitacion.Ff}}<br>
+                            RRR:  {{precipitacion.RRR}}<br>
+                             <br>
+                     </li>
+                
+                        {%endfor%}
+                        
                     </section>
                 </article>
             </div>
