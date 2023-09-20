@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" tydive="text/css" href="static/css/estilos.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Bienvenido a tus resultados</h1>
+    <h2>* Tu porcentaje de efectividad es: {{ datos.PorcentajeRF *100 }} % segun el modelo Random forest</h2>
+    <h3>Tus predicciones son: </h3>
+    <li> {{ datos.prediccionesRF }} </li>
+    <br>
+    <h2>* Tu porcentaje de efectividad es: {{ datos.PorcentajeMVS *100 }} % segun el modelo maquina vector soporte</h2>
+    <h3>Tus predicciones son: </h3>
+    <li> {{ datos.prediccionesMVS }} </li>
+    <br>
+    <h2>* Tu porcentaje de efectividad es: {{ datos.PorcentajeNV *100 }} % segun el modelo Naive Bayes</h2>
+    <h3>Tus predicciones son: </h3>
+    <li> {{ datos.prediccionesNV}} </li>
+
+</body>
+</html>

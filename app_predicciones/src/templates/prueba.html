@@ -18,9 +18,12 @@
         <div class="contenedor_test">
             <div class="area_subir">
                 <section>
-                    <h2>Carga tu archivo con extensión csv</h2>
+                    <h2>Carga tu archivo con nombre: "archivo" y extensión "csv" => "archivo.csv"</h2>
                     <!--Con el atributo accept para recibir solo archivos de tipo csv-->
-                    <input class="carga_archivo" type="file" accept=".csv">
+                    <form action="/upload" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="archivo">
+                        <input type="submit">
+                    </form>
                 </section>
             </div>
             <div class="area_subir">
@@ -51,3 +54,4 @@
     </div>
 </body>
 </html>
+
