@@ -182,15 +182,50 @@ h2 {
 }
 
 
+/* Estilos para la pantalla de Resultados */
+.contenedor_result{
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+    flex-grow: 1;
+    padding: 15px;
+}
+
+.area_modelo{
+flex-basis: calc(50% - 10px);
+    padding: 10px;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+/* Estilos para el porcentaje */
+.porciento {
+    font-size: 36px;
+    color: #3498db; 
+    font-weight: bold; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
+    margin: 10px 0;
+    transition: transform 0.2s;
+}
+
+.porciento:hover {
+    transform: scale(1.1); 
+}
+
 
 
 /* Estilos para pantallas pequeñas */
 @media screen and (max-width: 768px) {
-    .contenedor, .contenedor_404, .contenedor_datos {
+    .contenedor, .contenedor_404, .contenedor_datos, .contenedor_result {
         flex-direction: column;
     }
     
-    .area_1, .area_2, .area_404, .area_historico, .area_graficos {
+    .area_1, .area_2, .area_404, .area_historico, .area_graficos, .area_modelo {
         flex-basis: 100%;
     }
 

@@ -70,7 +70,6 @@ def procesoAlgoritmo():
 # separa los datos en "XRF" y en "YRF"
 # "XRF" representa todas las columnas menos la ultima la cual es la de respuesta
 # "YRF" representa la columna de respuesta
-
     XRF = df.iloc[:,:-1]
     YRF = df.iloc[:,-1]
 

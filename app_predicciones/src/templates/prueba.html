@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" tydive="text/css" href="static/css/estilos.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "icon" href="{{ url_for('static', filename = 'img/icono.icon') }}">
     <title>Probar modelo</title>
 </head>
 <body>
@@ -18,16 +19,18 @@
         <div class="contenedor_test">
             <div class="area_subir">
                 <section>
-                    <h2>Carga tu archivo con nombre: "archivo" y extensión "csv" => "archivo.csv"</h2>
+                    <h2>Carga tu archivo con nombre: "archivo"</h2>
+                    <p>Recuerda que la extension del archivo debe ser .csv</p>
                     <!--Con el atributo accept para recibir solo archivos de tipo csv-->
                     <form action="/upload" method="POST" enctype="multipart/form-data">
-                        <input type="file" name="archivo">
+                        <input type="file" name="archivo" accept=".csv">
+                        <br><br>
                         <input type="submit">
                     </form>
                 </section>
             </div>
             <div class="area_subir">
-                <h2>Selecciona los porcentajes de prueba y entrenamiento</h2>
+                <h2>Porcentajes de prueba y entrenamiento</h2>
                 <form>
                     <label for="porcentaje1">Entrenamiento:</label>
                     <input type="number" id="porcentaje1" name="porcentaje1" min="0" max="100" step="1"> %
@@ -40,7 +43,7 @@
             </div>
             <div class="muestra">
                 <section>
-                    <h2>Un ejemplo de como se ve el formato del archivo</h2>
+                    <h2>Un ejemplo de como se ve el formato del archivo para convertirlo a .csv</h2>
                     <img class="ejemplo" src="static/img/ejemplo.png">
                 </section>
             </div>
@@ -54,4 +57,3 @@
     </div>
 </body>
 </html>
-
