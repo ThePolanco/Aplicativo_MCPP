@@ -205,6 +205,33 @@ def datos():
     PrecipitacionesRegistradas=precipitaciones.find()
     return render_template('datos.html', precipitaciones = PrecipitacionesRegistradas)
 
+
+ArchivoG=pd.read_csv('./src/Archivos csv/archivo.csv', sep=',', header=None)
+
+
+# Matriz de correlacion
+@app.route('/Mcorrelacion')
+def Mcorrelacion():
+    correlation_matrix = ArchivoG.corr()
+# Creación de un mapa de calor de la matriz de correlación
+    plt.figure(figsize=(10, 8))  # Tamaño de la figura
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=.5)
+    plt.title("Matriz de Correlación")
+    plt.show()
+    return redirect(url_for('procesoAlgoritmo'))
+
+
+# Creación de un Grafico de todas las variables
+@app.route('/GraficoDT')
+def GraficoDT():
+    ArchivoG.hist()
+    plt.show()
+    return redirect(url_for('procesoAlgoritmo'))
+    
+
+
+
+
 # Control del error 404
 def error_404(error):
     return render_template('error_404.html'), 404
