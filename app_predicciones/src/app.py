@@ -229,9 +229,6 @@ def GraficoDT():
     return redirect(url_for('procesoAlgoritmo'))
     
 
-
-
-
 # Control del error 404
 def error_404(error):
     return render_template('error_404.html'), 404
