@@ -21,29 +21,37 @@
                 <article>
                     <section class="zona_historico">
                         <h2 class="titulo">Datos historicos de predicciones</h2>
-                        <h1>BIENVENIDO</h1>
-                        <h2>* Visualización de datos en Año/Mes/Día </h2>
+                        <h3>Visualización de datos en Año/Mes/Día</h3>
                         
                         <!--
                             Se utiliza jinja2 para hacer la visualización y correspondiente actualización de los datos mediante un for que recorra todas nuestras colecciones
                         -->
-                    
-                        {%for precipitacion in precipitaciones %}
-                    
-                        <li>
-                            <h2></h2> 
-                            Fecha:  {{precipitacion.fecha}} <br>
-                            Hora:  {{precipitacion.hora}}<br>
-                            Po:  {{precipitacion.Po}}<br>
-                            T:  {{precipitacion.T}}<br>
-                            U:  {{precipitacion.U}}<br>
-                            Ff:  {{precipitacion.Ff}}<br>
-                            RRR:  {{precipitacion.RRR}}<br>
-                             <br>
-                     </li>
-                
-                        {%endfor%}
-                        
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <td>Fecha</td>
+                                    <td>Hora</td>
+                                    <td>Po</td>
+                                    <td>T</td>
+                                    <td>U</td>
+                                    <td>Ff</td>
+                                    <td>RRR</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for precipitacion in precipitaciones %}
+                                <tr>
+                                    <td>{{precipitacion.fecha}}</td>
+                                    <td>{{precipitacion.hora}}</td>
+                                    <td>{{precipitacion.Po}}</td>
+                                    <td>{{precipitacion.T}}</td>
+                                    <td>{{precipitacion.U}}</td>
+                                    <td>{{precipitacion.Ff}}</td>
+                                    <td>{{precipitacion.RRR}}</td>
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
                     </section>
                 </article>
             </div>

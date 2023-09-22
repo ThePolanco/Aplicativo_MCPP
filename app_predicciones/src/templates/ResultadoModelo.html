@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Resultados de Predicción</title>
     <link rel = "icon" href="{{ url_for('static', filename = 'img/icono.icon') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-5sArXKGvUs7I7FfS3d1Knz6Hcd8eGLjI4lczp3L9zOcSw5FllFpTzp5LI9O5z4ls" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/62ea397d3a.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="resultados">
@@ -43,18 +41,17 @@
                     <p>{{ datos.prediccionesNV }}</p>
                 </ul>
             </section>
-
-            <input class="boton" type="submit" value="Matriz de correlacion" name="MatrizCorrelación" onclick="location.href='/Mcorrelacion'">
-            <input class="boton" type="submit" value="Grafico De Variables" name="GraficoVariables" onclick="location.href=('/GraficoDT')">
-
-
-            <footer class="footer">
-                <ul class="nav_foo">
-                    <li class="nav_li1"><a href="#">Acerca de</a></li>
-                    <li class="nav_li1"><a href="#">Lineas de atención</a></li>
-                </ul>
-            </footer>
+            <section class="area_modelo">
+                <input class="boton" type="submit" value="Matriz de correlacion" name="MatrizCorrelación" onclick="location.href='/Mcorrelacion'">
+                <input class="boton" type="submit" value="Grafico De Variables" name="GraficoVariables" onclick="location.href=('/GraficoDT')">
+            </section>
         </div>
+        <footer class="footer">
+            <ul class="nav_foo">
+                <li class="nav_li1"><a href="#">Acerca de</a></li>
+                <li class="nav_li1"><a href="#">Lineas de atención</a></li>
+            </ul>
+        </footer>
     </div>
 </body>
 </html>
