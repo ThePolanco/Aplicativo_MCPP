@@ -12,15 +12,29 @@
         <header>
             <nav class="nav">
                 <ul class="nav_ul_">
-                    <h1 class="titulo">¡BIENVENIDO AL LA SECCIÓN DE VISTA DE DATOS TOMADOS POR LA ESTACIÓN METEREOLOGICA!</h1>
+                    <h1 class="titulo">¡BIENVENIDO A LA SECCIÓN DE VISTA DE DATOS TOMADOS POR LA ESTACIÓN METEREOLOGICA!</h1>
                 </ul>
             </nav>
         </header> 
         <div class="contenedor_datos">
             <div class="area_historico">
+                <article class="zona_graficos">
+                    <h2 class="titulo">Filtro de predicciones por fecha</h2>
+
+                        <form action = "/fechaBuscada" method = "post">
+                        <input type="text" name="fecha" placeholder="Ingrese una fecha en A-M-D">
+                        <button type = "submit">Guardar</button>
+                        </form>
+                                            
+                    
+                </article>
+
+            </div>
+            <div class="area_graficos">
+                
                 <article>
                     <section class="zona_historico">
-                        <h2 class="titulo">Datos historicos de predicciones</h2>
+                        <h2 class="titulo">Datos historicos utilizados en las predicciones</h2>
                         <h3>Visualización de datos en Año/Mes/Día</h3>
                         
                         <!--
@@ -53,15 +67,6 @@
                             </tbody>
                         </table>
                     </section>
-                </article>
-            </div>
-            <div class="area_graficos">
-                <article class="zona_graficos">
-                    <h2 class="titulo">Graficos de predicciones por fecha</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora dignissimos iure, aliquid soluta inventore odio culpa amet reprehenderit itaque tenetur laudantium aspernatur, asperiores nostrum autem magnam cupiditate natus eos.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, necessitatibus quibusdam. Mollitia voluptates, ab nam porro modi officia tenetur eligendi optio rerum nisi ea similique inventore, officiis rem dolores sunt?
-                    </p>
                 </article>
             </div>
         </div>

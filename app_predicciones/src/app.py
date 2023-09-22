@@ -33,6 +33,7 @@ app = Flask(__name__)
 # Carpeta de subida del archivo
 app.config['UPLOAD_FOLDER'] = './src/Archivos csv'
 
+
 # Ruta para el index
 @app.route('/')
 def index():
@@ -197,19 +198,28 @@ def procesoAlgoritmo():
 
 #*****************************************************************************************************************************************************************************************************
 con_bd = Conexion()
-#Ruta para la pantalla de datos
+#Ruta para la pantalla de datos donde se muestra toda la Data
 @app.route('/datos')
 def datos():
-    # Se modifica la vista datos para poder hacer el muestreo de los datos
     precipitaciones = con_bd['Datos']
     PrecipitacionesRegistradas=precipitaciones.find()
     return render_template('datos.html', precipitaciones = PrecipitacionesRegistradas)
 
+#Ruta para la pantalla de datos donde se muestra la data consultada
+@app.route('/fechaBuscada',methods = ['POST'])
+def Read():
+    precipitaciones = con_bd['Datos']
+    fechabuscada = request.form['fecha']
+    query={"fecha":fechabuscada}
+    PrecipitacionesRegistradas=precipitaciones.find(query)
+    return render_template('datos.html', precipitaciones = PrecipitacionesRegistradas)
 
+
+# inicializacion de una variable publica que captura el archivo inserttado por el usuario
 ArchivoG=pd.read_csv('./src/Archivos csv/archivo.csv', sep=',', header=None)
 
 
-# Matriz de correlacion
+# Creación de un Grafico de Matriz de correlacion con el archivo subido por el usuario
 @app.route('/Mcorrelacion')
 def Mcorrelacion():
     correlation_matrix = ArchivoG.corr()
@@ -221,13 +231,12 @@ def Mcorrelacion():
     return redirect(url_for('procesoAlgoritmo'))
 
 
-# Creación de un Grafico de todas las variables
+# Creación de un Grafico de todas las variables con el archivo subido por el usuario
 @app.route('/GraficoDT')
 def GraficoDT():
     ArchivoG.hist()
     plt.show()
     return redirect(url_for('procesoAlgoritmo'))
-    
 
 # Control del error 404
 def error_404(error):
