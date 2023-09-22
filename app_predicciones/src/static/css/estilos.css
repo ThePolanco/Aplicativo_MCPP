@@ -2,7 +2,7 @@
 
 body {
     background-image: url('https://img.freepik.com/vector-gratis/gotas-lluvia-sobre-fondo-negro_1017-33594.jpg?w=826&t=st=1695345716~exp=1695346316~hmac=bee171befb9ba5f9582dc13d8314f9c0e5667d8971e4ece9df1926356c782fe3');
-    font-family: Arial, sans-serif;
+    font-family: system-ui, serif;
     margin: 0;
     padding: 0;
     display: flex;
@@ -75,6 +75,7 @@ body {
 /* Cambio de color al pasar el ratón por encima */
 .boton1:hover, .boton2:hover {
     background-color: #2980b9; 
+    transform: scale(1.02); 
 }
 
 /* Estilos de pie de página */
@@ -82,7 +83,6 @@ body {
     background: #1e3c72;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to bottom, #2a5298, #1e3c72);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to bottom, #2a5298, #1e3c72); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
     color: #fff;
     text-align: center;
     padding: 10px 0;
