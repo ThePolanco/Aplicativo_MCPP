@@ -33,7 +33,6 @@ app = Flask(__name__)
 # Carpeta de subida del archivo
 app.config['UPLOAD_FOLDER'] = './src/Archivos csv'
 
-
 # Ruta para el index
 @app.route('/')
 def index():
@@ -229,6 +228,7 @@ def Mcorrelacion():
     plt.figure(figsize=(10, 8))  # Tamaño de la figura
     sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=.5)
     plt.title("Matriz de Correlación")
+    plt.savefig("./src/Archivos img/GraficoMC.jpg")
     plt.show()
     return redirect(url_for('index'))
 
@@ -237,6 +237,7 @@ def Mcorrelacion():
 @app.route('/GraficoDT')
 def GraficoDT():
     ArchivoG.hist()
+    plt.savefig("./src/Archivos img/GraficoDT.jpg")
     plt.show()
     return redirect(url_for('index'))
 
