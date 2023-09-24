@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\Admin\Documents\GitHub\Proyecto_de_Grado\app_predicciones\env"
+VIRTUAL_ENV="C:\Users\leydi\OneDrive\Escritorio\tesisProject\env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

@@ -46,21 +46,23 @@ def index():
 def prueba():    
     return render_template('prueba.html')
 # Funcion para recibir el archivo y enviarlo a una carpeta llamada Archivos csv creada en la carpeta src
-@app.route("/upload", methods=['POST'])
-def uploader():
- if request.method == 'POST':
-  # obtenemos el archivo del input "archivo"
-  f = request.files['archivo']
-  filename = secure_filename(f.filename)
-  # Guardamos el archivo en el directorio "Archivos PDF"
-  f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-  # Retornamos una respuesta satisfactoria
-  return redirect(url_for('procesoAlgoritmo'))
-
 #Aqui se hara todo el proceso para leer el archivo seleccionado y aplicaar los modelos
-@app.route('/RTA')
+@app.route('/RTA', methods=['POST'])
 def procesoAlgoritmo():
+   if request.method == 'POST':
+  # obtenemos el archivo del input "archivo"
+    f = request.files['archivo']
+    filename = secure_filename(f.filename)
+  # Guardamos el archivo en el directorio "Archivos PDF"
+    f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
+
+
+
+#test_size- valor de entrenamiento
+
+    traine=int(request.form['test_size'])
+    trainee=traine*0.01
 # Random forest
 
 
@@ -78,7 +80,7 @@ def procesoAlgoritmo():
     XRF_normalizada=np.log1p(df.iloc[:,:-1])
 
 # configuracion dl modelo con datos normalizados mediante a logaritmos neperianos
-    XRF_train, XRF_test, YRF_train, YRF_test = train_test_split(XRF_normalizada,YRF, test_size=0.2, random_state=1)
+    XRF_train, XRF_test, YRF_train, YRF_test = train_test_split(XRF_normalizada,YRF, test_size=trainee, random_state=1)
 
 #Random forest
 
@@ -116,7 +118,7 @@ def procesoAlgoritmo():
 
 
 # División de los datos en un 80% para entrenamiento y un 20% para prueba
-    XMVS_train,XMVS_test, YMVS_train, YMVS_test = train_test_split(XMVS, YMVS, test_size=0.2, random_state=42)
+    XMVS_train,XMVS_test, YMVS_train, YMVS_test = train_test_split(XMVS, YMVS, test_size=trainee, random_state=42)
 
     clf = SVC(kernel = 'linear').fit(XMVS_train, YMVS_train)
     ocurrenciaMVS=clf.score(XMVS_test, YMVS_test)
@@ -162,7 +164,7 @@ def procesoAlgoritmo():
 # División de los datos en conjuntos de prueba y entrenamiento, 80% para entrenamiento y 20% para prueba
 
 # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.20, random_state = 6)
-    XNV_train, XNV_test, y_train, y_test = train_test_split(XNV,y, test_size = 0.2, random_state = 6)
+    XNV_train, XNV_test, y_train, y_test = train_test_split(XNV,y, test_size = trainee, random_state = 6)
 
 
 # Normalizacion de la data
@@ -228,7 +230,7 @@ def Mcorrelacion():
     sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=.5)
     plt.title("Matriz de Correlación")
     plt.show()
-    return redirect(url_for('procesoAlgoritmo'))
+    return redirect(url_for('index'))
 
 
 # Creación de un Grafico de todas las variables con el archivo subido por el usuario
@@ -236,7 +238,7 @@ def Mcorrelacion():
 def GraficoDT():
     ArchivoG.hist()
     plt.show()
-    return redirect(url_for('procesoAlgoritmo'))
+    return redirect(url_for('index'))
 
 # Control del error 404
 def error_404(error):

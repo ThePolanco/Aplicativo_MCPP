@@ -22,24 +22,18 @@
                     <h2>Carga tu archivo con nombre: "archivo"</h2>
                     <p>Recuerda que la extension del archivo debe ser .csv</p>
                     <!--Con el atributo accept para recibir solo archivos de tipo csv-->
-                    <form action="/upload" method="POST" enctype="multipart/form-data">
-                        <input type="file" name="archivo" accept=".csv">
+                    <form action="/RTA" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="archivo" accept=".csv" required>
+                        <br>
+                        <hr>
+                        <h2>Porcentajes de prueba</h2>
+                        <label for="test_sizee">test_size:</label>
+                        <input type="text" id="test_sizee" name="test_size" placeholder="Es recomendable dejar 20" required> %
                         <br><br>
-                        <input type="submit">
+                        <input type="submit" value="Enviar">
+                        <br>
                     </form>
                 </section>
-            </div>
-            <div class="area_subir">
-                <h2>Porcentajes de prueba y entrenamiento</h2>
-                <form>
-                    <label for="porcentaje1">Entrenamiento:</label>
-                    <input type="text" id="porcentaje1" name="porcentaje1"> %
-                    <br>
-                    <label for="porcentaje2">Prueba:</label>
-                    <input type="text" id="porcentaje2" name="porcentaje2"> %
-                    <br><br>
-                    <input type="submit" value="Enviar">
-                </form>
             </div>
             <div class="muestra">
                 <section>
