@@ -1,3 +1,12 @@
+'''
+Videos de guia
+https://www.youtube.com/watch?v=N1h5b2JGiII
+https://www.google.com/search?q=como+exportar+datos+de+mongodb+a+una+archivo+csv&client=opera-gx&hs=GB8&sca_esv=568744667&sxsrf=AM9HkKlxbKNJZqVv6fCUdpOGHDZBQrK-_A%3A1695798065858&ei=MdMTZbyHNICzkvQPmZmNoAQ&ved=0ahUKEwj8482KnMqBAxWAmYQIHZlMA0QQ4dUDCBA&uact=5&oq=como+exportar+datos+de+mongodb+a+una+archivo+csv&gs_lp=Egxnd3Mtd2l6LXNlcnAiMGNvbW8gZXhwb3J0YXIgZGF0b3MgZGUgbW9uZ29kYiBhIHVuYSBhcmNoaXZvIGNzdjIFEAAYogQyBRAAGKIEMgUQABiiBDIFEAAYogRI_ilQ6AVYlh9wAXgBkAEAmAGzAaAB0wqqAQMwLji4AQPIAQD4AQHCAgoQABhHGNYEGLAD4gMEGAAgQYgGAZAGCA&sclient=gws-wiz-serp
+https://xrnogales.medium.com/exportando-datos-a-csv-excel-desde-mongodb-con-python-f58db58e764f
+
+'''
+
+
 import os
 # Importar Flask y request
 from flask import Flask, render_template, request, redirect, url_for
