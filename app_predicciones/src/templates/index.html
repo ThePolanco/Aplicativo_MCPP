@@ -37,10 +37,32 @@
             <div class="area_2">
                 <article class="zona_2">
                     <h2 class="titulo">Datos actualizados de predicciones futuras</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur tempora dignissimos iure, aliquid soluta inventore odio culpa amet reprehenderit itaque tenetur laudantium aspernatur, asperiores nostrum autem magnam cupiditate natus eos.
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, necessitatibus quibusdam. Mollitia voluptates, ab nam porro modi officia tenetur eligendi optio rerum nisi ea similique inventore, officiis rem dolores sunt?
-                    </p>
+                    <div class="contenedor_result">
+                        <section class="area_modelo">
+                            <h2>El porcentaje de efectividad segun el modelo Random Forest <i class="fas fa-tree"></i></h2>
+                            <p class="porciento">{{ Predicciones.PorcentajeRF * 100 }}%</p>
+                            <h3>Las predicciones son:</h3>
+                            <ul>
+                                <p>{{ Predicciones.prediccionesRF }}</p>
+                            </ul>
+                        </section>
+                        <section class="area_modelo">
+                            <h2></i>El  porcentaje de efectividad segun el modelo Máquina de Vector Soporte<i class="fas fa-sitemap"></i></h2>
+                            <p class="porciento">{{ Predicciones.PorcentajeMVS * 100 }}%</p>
+                            <h3>Las predicciones son:</h3>
+                            <ul>
+                                <p>{{ Predicciones.prediccionesMVS }}</p>
+                            </ul>
+                        </section>
+                        <section class="area_modelo">
+                            <h2></i>El porcentaje de efectividad segun el modelo Naive Bayes<i class="fas fa-calculator"></i></h2>
+                            <p class="porciento">{{ Predicciones.PorcentajeNV * 100 }}%</p>
+                            <h3>Las predicciones son:</h3>
+                            <ul>
+                                <p>{{ Predicciones.prediccionesNV }}</p>
+                            </ul>
+                        </section>
+                    </div>
                 </article>
             </div>
         </div>      

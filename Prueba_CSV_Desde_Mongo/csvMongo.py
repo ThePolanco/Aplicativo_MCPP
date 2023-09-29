@@ -49,8 +49,7 @@ df = pd.DataFrame(list(collection.find()))
 df.drop('fecha', inplace=True, axis=1)
 df.drop('hora', inplace=True, axis=1)
 df.drop('_id', inplace=True, axis=1)
-
-
+df.dropna(axis=0)
 '''
 # Obtener un df con datos filtrados: (precio < 50)
 df = pd.DataFrame(list(collection.find({"price": {"$lt": 50}})))
@@ -65,9 +64,11 @@ df.to_csv('filename.csv', index=False)
 
 #**************************************************************************************************************************************************************
 #leer archivo quittando lasa primeras filas
-ddaa=pd.read_csv("C:/Users/Usuario/Desktop/Tesis/Proyecto_de_Grado/filename.csv", sep=',', header=None)
+ddaa=pd.read_csv("C:/Users/Usuario/Desktop/Tesis/Proyecto_de_Grado/Prueba_CSV_Desde_Mongo/filename.csv", sep=',', header=None)
 
+ddaa.drop(ddaa.iloc[1])
 
-X = ddaa.iloc[1:,:-1]
-
+X = ddaa.iloc[:,:-1]
+Y = df.iloc[:,-1]
 print(X)
+print(Y)
