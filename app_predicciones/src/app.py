@@ -69,11 +69,11 @@ def index():
 # separa los datos en "XRF" y en "YRF"
 # "XRF" representa todas las columnas menos la ultima la cual es la de respuesta
 # "YRF" representa la columna de respuesta
-    XRF = df.iloc[1:,:-1]
-    YRF = df.iloc[1:,-1]
+    XRF = df.iloc[:,:-1]
+    YRF = df.iloc[:,-1]
 
 # Normalizamos los datos con logaritmos neperianos
-    XRF_normalizada=XRF
+    XRF_normalizada=np.log1p(df.iloc[:,:-1])
 
 # configuracion dl modelo con datos normalizados mediante a logaritmos neperianos
     XRF_train, XRF_test, YRF_train, YRF_test = train_test_split(XRF_normalizada,YRF, test_size=0.2, random_state=1)
@@ -81,7 +81,7 @@ def index():
 #Random forest
 
     rf= RandomForestClassifier(n_estimators=1000,criterion='gini',max_depth=1000,min_samples_split=3,min_samples_leaf=1,min_weight_fraction_leaf=0.0,max_features='sqrt',max_leaf_nodes=10,min_impurity_decrease=0.0,bootstrap=True,oob_score=False,n_jobs=-1,random_state=1,verbose=0,warm_start=False,ccp_alpha=0.0,max_samples=10)
-
+    # Ajustar parametros de regresión lineal de datos
     rf.fit(XRF_train,YRF_train)
 
     YRF_prdss = rf.predict(XRF_test)
@@ -107,8 +107,8 @@ def index():
 # separa los datos en "XMVS" y en "YMVS"
 # "XMVS" representa todas las columnas menos la ultima la cual es la de respuesta
 # "YMVS" representa la columna de respuesta
-    XMVS = datos.iloc[1:,:-1]
-    YMVS = datos.iloc[1:,-1]
+    XMVS = datos.iloc[:,:-1]
+    YMVS = datos.iloc[:,-1]
 
 # División de los datos en un 80% para entrenamiento y un 20% para prueba
     XMVS_train,XMVS_test, YMVS_train, YMVS_test = train_test_split(XMVS, YMVS, test_size=0.2, random_state=42)
@@ -144,8 +144,8 @@ def index():
 
 # Haremos Feature Selection para mejorar los resultados del algoritmo. Utilizando la clase SelectKBest para seleccionar las 5 mejores caracteristicas. Son las variables que mas aportan al momento de realizar la clasificación.
 
-    XNV = df_data.iloc[1:,:-1]
-    y = df_data.iloc[1:,-1]
+    XNV = df_data.iloc[:,:-1]
+    y = df_data.iloc[:,-1]
 
     best = SelectKBest(k = 4)
     XNV_new = best.fit_transform(XNV,y)
@@ -187,6 +187,82 @@ def index():
         'prediccionesNV':y_pred,
         'PorcentajeNV':ocurrenciaNV
         }
+    #Comparacion de los modelos con el modelo Lupo
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    print("El tipo de dato es: ", type(YRF_prdss))
+    print("El valor el la posicion es: ", YRF_prdss[0])
+    print("El tamaño es: ",len(YRF_prdss))
+    print("El tamaño es: ",len(YMVS_pred))
+    print("El tamaño es: ",len(y_pred))
+    #Guardar la cantidad de resultados generados por los algoritmos
+    TamaA=len(YRF_prdss)
+    #Crear un bucle Que permita leer cada dato
+    lupo = []
+    ni=0
+    while ni<TamaA:
+        #Comparar ocurrencia para generar nuevos resultados
+        if(ocurrenciaRF>0.60 and ocurrenciaMVS>0.60 and ocurrenciaNV>0.60):
+            if(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                lupo.append(0)
+            else:
+                print("no concuerda")
+        else:
+            print("No concuerda el valor")
+        ni=ni+1
+
+    print(lupo)
+    print("El tamaño es: ",len(lupo))
+    ocurrenciaLupo=accuracy_score(y_test, lupo)
+
+    print("El porcentaje de efectividad de Lupo es: ", ocurrenciaLupo)
+
+    #muestreo de datos del ultimo dato
+
+    precipitaciones = con_bd['Datos']
+    PrecipitacionesRegistradas=precipitaciones['fecha'].find()
+
+    lluvia=""
+    if(lupo[TamaA-1]==1):
+        lluvia="Si llovera"
+    else:
+        lluvia="No llovera"
+
+
+
+
+    resultadosDb = {
+        'realRF':YRF_test,
+        'prediccionesRF':YRF_prdss,
+        'PorcentajeRF':ocurrenciaRF,
+        'realMVS':YMVS_test,
+        'prediccionesMVS':YMVS_pred,
+        'PorcentajeMVS':ocurrenciaMVS,
+        'realNV':y_test,
+        'prediccionesNV':y_pred,
+        'PorcentajeNV':ocurrenciaNV,
+        'LupoRTA':lupo,
+        'LupoOcurrencia':ocurrenciaLupo,
+        'lluvia':lluvia,
+        'precipitaciones': PrecipitacionesRegistradas
+        }
+    
+
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     #return "<h2> {%lista%} </h2>"
     return render_template('index.html',Predicciones=resultadosDb)
 
