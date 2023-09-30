@@ -7,21 +7,17 @@ body {
     font-family: system-ui, serif;
     margin: 0;
     padding: 0;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     min-height: 100vh; 
     color: #000;
 }
 
-/* Estilos de encabezado */
-.nav {
-    background: #1e3c72;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to top, #2a5298, #1e3c72);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to top, #2a5298, #1e3c72); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
+.index{
+    max-width: 100%;
 }
+/* Estilos de encabezado */
 
 .titulo {
     font-size: 24px;
@@ -39,6 +35,13 @@ body {
     padding: 15px; 
 }
 
+.row{
+    height: auto;
+    width: auto;
+    padding: 0%;
+    margin: 0 auto;
+}
+
 .area_1, .area_2 {
     flex-basis: calc(50% - 10px);
     padding: 10px;
@@ -49,15 +52,12 @@ body {
     border-radius: 5px;
 }
 
+
 /* Estilos de botones */
 
 .contenedor_2{
-    text-align: center;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    flex-grow: 1;
-    font-size: 50px;
-    padding: 16px;
+    width: auto;
+    padding: 15px;
 }
 
 .boton1, .boton2 {

@@ -2,27 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" tydive="text/css" href="static/css/estilos.css">
+    <link rel="stylesheet" tydive="text/css" href="static/css/estilos2.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "icon" href="{{ url_for('static', filename = 'img/icono.icon') }}">
     <title>Predicción de precipitaciones</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
     <div class="index">
+        
         <!--Parte superior del index-->
-        <header>
-            <nav class="nav">
-                <ul class="nav_ul">
-                    <h1 class="titulo">¡BIENVENIDO AL MODELO DE PREDICCIÓN DE PRECIPITACIONES!</h1>
-                </ul>
-            </nav>
-        </header>
+        <header class="header">
+        <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
+            <div class="container-fluid">
+                <a class="navbar-brand">¡BIENVENIDO AL MODELO LUPO!</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+        
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/prueba">Probar modelo</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/datos">Ver datos</a>
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
         <!--Cuerpo del index-->
         <div class="contenedor">
             <div class="area_1">
                 <article>
                     <section class="zona_1">
-                        <h2 class="titulo">¿Llovera mañana?</h2>
+                        <h3 class="titulo">¿Llovera mañana?</h3>
                         <p>
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Non suscipit fuga omnis exercitationem excepturi! Harum repudiandae iusto consectetur doloribus enim inventore commodi quae minus, ad delectus porro, laboriosam velit culpa.
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam eum nemo explicabo nobis ut totam nulla earum possimus quas, quo unde ea, voluptatum expedita iste voluptatem impedit odio consectetur soluta?
@@ -36,59 +58,90 @@
             </div>
             <div class="area_2">
                 <article class="zona_2">
-                    <h2 class="titulo">Datos actualizados de predicciones futuras</h2>
-                    <div class="contenedor_result">
-                        <section class="area_modelo">
-                            <h2>El porcentaje de efectividad segun el modelo Random Forest <i class="fas fa-tree"></i></h2>
-                            <p class="porciento">{{ Predicciones.PorcentajeRF * 100 }}%</p>
-                            <h3>Las predicciones son:</h3>
-                            <ul>
-                                <p>{{ Predicciones.prediccionesRF }}</p>
-                            </ul>
-                        </section>
-                        <section class="area_modelo">
-                            <h2></i>El  porcentaje de efectividad segun el modelo Máquina de Vector Soporte<i class="fas fa-sitemap"></i></h2>
-                            <p class="porciento">{{ Predicciones.PorcentajeMVS * 100 }}%</p>
-                            <h3>Las predicciones son:</h3>
-                            <ul>
-                                <p>{{ Predicciones.prediccionesMVS }}</p>
-                            </ul>
-                        </section>
-                        <section class="area_modelo">
-                            <h2></i>El porcentaje de efectividad segun el modelo Naive Bayes<i class="fas fa-calculator"></i></h2>
-                            <p class="porciento">{{ Predicciones.PorcentajeNV * 100 }}%</p>
-                            <h3>Las predicciones son:</h3>
-                            <ul>
-                                <p>{{ Predicciones.prediccionesNV }}</p>
-                            </ul>
-                        </section>
+                    <h3 class="titulo">Datos actualizados de predicciones futuras segun el modelo:</h3>
+                    
+                    <div id="carouselExampleAutoplaying" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <section class="area_modelo">
+                                    <h4>Random Forest</h4>
+                                    <p class="porciento">{{ Predicciones.PorcentajeRF * 100 }}%</p>
+                                    <h5>Las predicciones son:</h5>
+                                    <ul>
+                                        <p>{{ Predicciones.prediccionesRF }}</p>
+                                    </ul>
+                                </section>
+                            </div>
+                            <div class="carousel-item">
+                                <section class="area_modelo">
+                                    <h4></i>Máquina de Vector Soporte</i></h4>
+                                    <p class="porciento">{{ Predicciones.PorcentajeMVS * 100 }}%</p>
+                                    <h5>Las predicciones son:</h5>
+                                    <ul>
+                                        <p>{{ Predicciones.prediccionesMVS }}</p>
+                                    </ul>
+                                </section>
+                            </div>
+                            <div class="carousel-item">
+                                <section class="area_modelo">
+                                    <h4></i>Naive Bayes</h4>
+                                    <p class="porciento">{{ Predicciones.PorcentajeNV * 100 }}%</p>
+                                    <h5>Las predicciones son:</h5>
+                                    <ul>
+                                        <p>{{ Predicciones.prediccionesNV }}</p>
+                                    </ul>
+                                </section>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
                 </article>
             </div>
         </div>      
     
         <div class="contenedor_2">
-            <div class="boton_1">
-                <a href="/prueba">
-                    <button class="boton1">Probar modelo</button>
-                </a>
+            <div class="button1" align="center">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Probar modelo</h5>
+                        <p class="card-text">Prueba el modelo con un conjunto de archivos que tengas</p>
+                        <a href="/prueba" class="btn btn-primary">PRUEBA</a>
+                    </div>
+                </div>
             </div>
-            
-            <div class="boton_2">
-                <a href="/datos">
-                    <button class="boton2">Ver datos de la estacion metereologica</button>
-                </a>
+            <div class="button2" align="center">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Visualizar datos</h5>
+                        <p class="card-text">Visualiza los datos de la estación metereologica de la UdeC</p>
+                        <a href="/datos" class="btn btn-primary">VER</a>
+                    </div>
+                </div>
             </div>
         </div>
+
         <!--Parte inferior del index-->
         <footer class="footer">
-            <ul class="nav_foo">
-                <li class="nav_li1"><a href="#">Acerca de</a></li>
-                <li class="nav_li1"><a href="#">Lineas de atención</a></li>
-                <p></p>
-                <li><a>By Luis Carlos Rincón, Jeison Polanco</a></li>
-            </ul>
+            <div class="card text mb-3"  align="center">
+                <div class="card-header">
+                    ¡Gracias por utilizar el algoritmo LUPO!
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">AUTORES</h5>
+                    <a href="https://github.com/LuisCarlosRinconG" class="btn btn-primary">Luis Carlos Rincón</a>
+                    <a href="https://linktr.ee/ThePolanco" class="btn btn-primary">Jeison Stiven Polanco</a>
+                </div>
+            </div>
         </footer>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
