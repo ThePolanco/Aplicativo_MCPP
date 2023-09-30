@@ -1,7 +1,8 @@
 body{
-    background-image: url('https://images.unsplash.com/photo-1517685352821-92cf88aee5a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80');
+    /**background-image: url('https://images.unsplash.com/photo-1517685352821-92cf88aee5a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80');
     background-size: cover;
-    background-attachment: fixed;
+    background-attachment: fixed;**/
+    background-color: white;
     margin: 0;
     padding: 0;
     max-width: 100%;
@@ -10,7 +11,7 @@ body{
 }
 
 .navbar{
-    background-color: #5096CF;
+    background-color: #072146;
     font-size: 20px;
 }
 
@@ -34,12 +35,12 @@ body{
     box-sizing: border-box;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
-    background-color: rgba(89, 146, 191, 0.8);
+    background-color: rgba(30, 138, 222, 0.8);
 }
 
 .porciento {
     font-size: 36px;
-    color: #34db4a; 
+    color: #3f3844; 
     font-weight: bold; 
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
     margin: 10px 0;
@@ -63,7 +64,7 @@ body{
 .button1, .button2{
     flex-basis: calc(50% - 10px);
     padding: 10px;
-    background-color: #ffffff;
+    background-color: #f0f0f0;
     margin-bottom: 20px;
     box-sizing: border-box;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -137,14 +138,20 @@ body{
     border-radius: 5px;
 }
 
+footer.container {
+    max-width: 100%;
+    background-color: #072146;
+    color: white;
+}
+
 
 /* Estilos para pantallas pequeñas */
 @media screen and (max-width: 768px) {
-    .header, .footer, .contenedor, .contenedor_2, .contenedor_404, .contenedor_datos, .contenedor_result {
+    .contenedor, .contenedor_2, .contenedor_404, .contenedor_datos, .contenedor_test, .contenedor_result {
         flex-direction: column;
     }
     
-    .area_1, .area_2, .button1, .button2, .area_404, .area_historico, .area_graficos, .area_modelo {
+    .area_1, .area_2, .button1, .button2, .area_404, .area_historico, .area_graficos, .area_modelo, .area_subir, .muestra {
         flex-basis: 100%;
     }
 

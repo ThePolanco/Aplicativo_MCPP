@@ -86,15 +86,36 @@
                 </article>
             </div>
         </div>
-        <footer class="footer">
-            <div class="card text mb-3"  align="center">
-                <div class="card-header">
-                    ¡Gracias por utilizar el algoritmo LUPO!
+        <footer class="container py-5">
+            <div class="row">
+                <div class="col-8 col-md">
+                    <img class="escudo" 
+                        src="{{ url_for('static', filename = 'img/escudo.png') }}" alt="UdeC Simbolo" 
+                        style="max-width: 60%; height: auto;">
+                    <br>
+                    <small class="link-secondary text-decoration-none">&copy; 2023 - UdeC</small>
                 </div>
-                <div class="card-body">
-                    <h5 class="card-title">AUTORES</h5>
-                    <a href="https://github.com/LuisCarlosRinconG" class="btn btn-primary">Luis Carlos Rincón</a>
-                    <a href="https://linktr.ee/ThePolanco" class="btn btn-primary">Jeison Stiven Polanco</a>
+                <div class="col-6 col-md">
+                    <h5>Funciones</h5>
+                        <ul class="list-unstyled text-small">
+                        <li><a class="link-secondary text-decoration-none" href="/">Inicio</a></li>
+                        <li><a class="link-secondary text-decoration-none" href="/prueba">Probar modelo</a></li>
+                        <li><a class="link-secondary text-decoration-none" href="/datos">Ver datos</a></li>
+                        </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Recursos</h5>
+                        <ul class="list-unstyled text-small">
+                        <li><a class="link-secondary text-decoration-none" href="#">Documentación</a></li>
+                        <li><a class="link-secondary text-decoration-none" href="#">Articulo modelos</a></li>
+                        </ul>
+                </div>
+                <div class="col-6 col-md">
+                    <h5>Equipo</h5>
+                        <ul class="list-unstyled text-small">
+                        <li><a class="link-secondary text-decoration-none" href="https://github.com/LuisCarlosRinconG">Luis Rincón</a></li>
+                        <li><a class="link-secondary text-decoration-none" href="https://linktr.ee/ThePolanco">Jeison Polanco</a></li>
+                        </ul>
                 </div>
             </div>
         </footer>
