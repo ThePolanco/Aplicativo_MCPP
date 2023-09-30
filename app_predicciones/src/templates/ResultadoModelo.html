@@ -13,7 +13,11 @@
         <header class="header">
             <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand">¡BIENVENIDO AL MODELO LUPO!</a>
+                    <img class="escudo" 
+                        src="{{ url_for('static', filename = 'img/escudo1.png') }}" 
+                        alt="UdeC Simbolo 1" 
+                        style="display: inline-block; max-width: 5%; height: auto;">
+                    <h1 class="display-5 text-center" style="color: white;">¡Resultados modelo LUPO!</h1>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -34,32 +38,39 @@
                         </ul>
                     </div>
                 </div>
-            </nav> 
+            </nav>
         </header>
         <div class="contenedor_result">
             <section class="area_modelo">
-                <h2>Tu porcentaje de efectividad segun el modelo Random Forest <i class="fas fa-tree"></i></h2>
-                <p class="porciento">{{ datos.PorcentajeRF * 100 }}%</p>
-                <h3>Tus predicciones son:</h3>
-                <ul>
-                    <p>{{ datos.prediccionesRF }}</p>
-                </ul>
+                <div class="card text-bg-info">
+                    <h2>Tu porcentaje de efectividad segun el modelo Random Forest <i class="fas fa-tree"></i></h2>
+                    <p class="porciento">{{ datos.PorcentajeRF * 100 }}%</p>
+                    <h3>Tus predicciones son:</h3>
+                    <ul>
+                        <p>{{ datos.prediccionesRF }}</p>
+                    </ul>
+                </div>
+            </section>
+            
+            <section class="area_modelo">
+                <div class="card text-bg-info">
+                    <h2></i>Tu porcentaje de efectividad segun el modelo Máquina de Vector Soporte<i class="fas fa-sitemap"></i></h2>
+                    <p class="porciento">{{ datos.PorcentajeMVS * 100 }}%</p>
+                    <h3>Tus predicciones son:</h3>
+                    <ul>
+                        <p>{{ datos.prediccionesMVS }}</p>
+                    </ul>
+                </div>
             </section>
             <section class="area_modelo">
-                <h2></i>Tu porcentaje de efectividad segun el modelo Máquina de Vector Soporte<i class="fas fa-sitemap"></i></h2>
-                <p class="porciento">{{ datos.PorcentajeMVS * 100 }}%</p>
-                <h3>Tus predicciones son:</h3>
-                <ul>
-                    <p>{{ datos.prediccionesMVS }}</p>
-                </ul>
-            </section>
-            <section class="area_modelo">
-                <h2></i>Tu porcentaje de efectividad segun el modelo Naive Bayes<i class="fas fa-calculator"></i></h2>
-                <p class="porciento">{{ datos.PorcentajeNV * 100 }}%</p>
-                <h3>Tus predicciones son:</h3>
-                <ul>
-                    <p>{{ datos.prediccionesNV }}</p>
-                </ul>
+                <div class="card text-bg-info">
+                    <h2></i>Tu porcentaje de efectividad segun el modelo Naive Bayes<i class="fas fa-calculator"></i></h2>
+                    <p class="porciento">{{ datos.PorcentajeNV * 100 }}%</p>
+                    <h3>Tus predicciones son:</h3>
+                    <ul>
+                        <p>{{ datos.prediccionesNV }}</p>
+                    </ul>
+                </div>
             </section>
             <section class="area_modelo">
                 <input class="boton" type="submit" value="Matriz de correlacion" name="MatrizCorrelación" onclick="location.href='/Mcorrelacion'">
@@ -93,8 +104,8 @@
                 <div class="col-6 col-md">
                     <h5>Equipo</h5>
                         <ul class="list-unstyled text-small">
-                        <li><a class="link-secondary text-decoration-none" href="https://github.com/LuisCarlosRinconG">Luis Rincón</a></li>
-                        <li><a class="link-secondary text-decoration-none" href="https://linktr.ee/ThePolanco">Jeison Polanco</a></li>
+                        <li><a class="link-secondary text-decoration-none" href="https://github.com/LuisCarlosRinconG">Luis Rincón Gordo</a></li>
+                        <li><a class="link-secondary text-decoration-none" href="https://linktr.ee/ThePolanco">Jeison Polanco Montaño</a></li>
                         </ul>
                 </div>
             </div>

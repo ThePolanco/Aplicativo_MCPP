@@ -14,7 +14,11 @@
         <header class="header">
             <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand">¡BIENVENIDO AL MODELO LUPO!</a>
+                    <img class="escudo" 
+                        src="{{ url_for('static', filename = 'img/escudo1.png') }}" 
+                        alt="UdeC Simbolo 1" 
+                        style="display: inline-block; max-width: 5%; height: auto;">
+                    <h1 class="display-5 text-center" style="color: white;">¡Prueba el algoritmo LUPO!</h1>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -35,31 +39,31 @@
                         </ul>
                     </div>
                 </div>
-            </nav> 
+            </nav>
         </header>
         <div class="contenedor_test">
             <div class="area_subir">
-                <section>
-                    <h3>Carga tu archivo con nombre: "archivo"</h3>
-                    <p>Recuerda que la extension del archivo debe ser .csv</p>
-                    <!--Con el atributo accept para recibir solo archivos de tipo csv-->
-                    <form action="/RTA" method="POST" enctype="multipart/form-data">
-                        <div class="input-group mb-3">
-                            <input type="file" class="form-control" accept=".csv" name="archivo">
-                        </div>
-                        <hr>
-                        <h4>Porcentaje de prueba</h4>
-                        <input type="text" id="test_sizee" name="test_size" placeholder="Es recomendable dejar 20" required> %
-                        <br><br>
-                        <input type="submit" value="Enviar">
-                        <br>
-                    </form>
-                </section>
+                    <div class="card text-bg-light">
+                        <h4>Carga tu archivo con nombre: "archivo"</h4>
+                        <p>Recuerda que la extension del archivo debe ser .csv</p>
+                        <!--Con el atributo accept para recibir solo archivos de tipo csv-->
+                        <form action="/RTA" method="POST" enctype="multipart/form-data">
+                            <div class="input-group mb-4">
+                                <input type="file" class="form-control" accept=".csv" name="archivo">
+                            </div>
+                            <hr>
+                            <h5>Porcentaje de prueba</h5>
+                            <input type="text" id="test_sizee" name="test_size" placeholder="Recomendado 20" required> %
+                            <br><br>
+                            <input type="submit" value="Enviar">
+                            <br>
+                        </form>
+                    </div>
             </div>
             <div class="muestra">
                 <section>
                     <h4>Un ejemplo de como se ve el formato del archivo para convertirlo a .csv</h4>
-                    <img class="ejemplo" src="static/img/ejemplo.png">
+                    <img src="static/img/ejemplo.png" class="img-fluid" alt="ejemplo">
                 </section>
             </div>
         </div>
@@ -90,8 +94,8 @@
                 <div class="col-6 col-md">
                     <h5>Equipo</h5>
                         <ul class="list-unstyled text-small">
-                        <li><a class="link-secondary text-decoration-none" href="https://github.com/LuisCarlosRinconG">Luis Rincón</a></li>
-                        <li><a class="link-secondary text-decoration-none" href="https://linktr.ee/ThePolanco">Jeison Polanco</a></li>
+                        <li><a class="link-secondary text-decoration-none" href="https://github.com/LuisCarlosRinconG">Luis Rincón Gordo</a></li>
+                        <li><a class="link-secondary text-decoration-none" href="https://linktr.ee/ThePolanco">Jeison Polanco Montaño</a></li>
                         </ul>
                 </div>
             </div>

@@ -40,9 +40,9 @@ body{
 
 .porciento {
     font-size: 36px;
-    color: #3f3844; 
+    color: #ffffff; 
     font-weight: bold; 
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); 
     margin: 10px 0;
     transition: transform 0.2s;
     cursor: pointer;
@@ -77,12 +77,21 @@ body{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-top: 20px;
+    margin: 20px;
     flex-grow: 1; 
 }
 
-.area_historico, .area_graficos {
-    flex-basis: calc(50% - 10px);
+.area_historico{
+    flex-basis: calc(30% - 10px);
+    padding: 10px;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+.area_graficos {
+    flex-basis: calc(70% - 10px);
     padding: 10px;
     background-color: #ffffff;
     margin-bottom: 20px;
@@ -103,10 +112,9 @@ body{
     height: 100%;
 }
 
-.area_subir,
-.muestra {
+.area_subir, .muestra {
     flex-basis: calc(50% - 10px);
-    padding: 10px;
+    padding: 0;
     background-color: #ffffff;
     margin-bottom: 20px;
     box-sizing: border-box;
@@ -114,6 +122,10 @@ body{
     border-radius: 5px;
     text-align: center;
     overflow: hidden;
+}
+
+.text-bg-light {
+    padding: 10px;
 }
 
 
@@ -144,6 +156,30 @@ footer.container {
     color: white;
 }
 
+/* Estilos de pantalla 404 */
+.contenedor_404 {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    margin-top: 20px;
+    flex-grow: 1; 
+    height: 100%;
+}
+
+.area_404 {
+    flex-basis: 100%;
+    padding: 10px;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    text-align: center;
+    overflow: hidden;
+}
+
 
 /* Estilos para pantallas pequeñas */
 @media screen and (max-width: 768px) {
@@ -154,5 +190,4 @@ footer.container {
     .area_1, .area_2, .button1, .button2, .area_404, .area_historico, .area_graficos, .area_modelo, .area_subir, .muestra {
         flex-basis: 100%;
     }
-
 }
