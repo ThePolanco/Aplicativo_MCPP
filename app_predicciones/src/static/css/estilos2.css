@@ -116,6 +116,26 @@ body{
 }
 
 
+/* Estilos para la pantalla de Resultados */
+.contenedor_result{
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+    flex-grow: 1;
+}
+
+
+.area_modelo{
+    flex-basis: calc(50% - 10px);
+    padding: 10px;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
 
 
 /* Estilos para pantallas pequeñas */

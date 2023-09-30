@@ -40,15 +40,15 @@
         <div class="contenedor_test">
             <div class="area_subir">
                 <section>
-                    <h2>Carga tu archivo con nombre: "archivo"</h2>
+                    <h3>Carga tu archivo con nombre: "archivo"</h3>
                     <p>Recuerda que la extension del archivo debe ser .csv</p>
                     <!--Con el atributo accept para recibir solo archivos de tipo csv-->
                     <form action="/RTA" method="POST" enctype="multipart/form-data">
-                        <input type="file" name="archivo" accept=".csv" required>
-                        <br>
+                        <div class="input-group mb-3">
+                            <input type="file" class="form-control" placeholder="Cargar archivo" aria-label="Recipient's username" aria-describedby="button-addon2" accept=".csv" name="archivo">
+                        </div>
                         <hr>
-                        <h2>Porcentajes de prueba</h2>
-                        <label for="test_sizee">test_size:</label>
+                        <h4>Porcentajes de prueba</h4>
                         <input type="text" id="test_sizee" name="test_size" placeholder="Es recomendable dejar 20" required> %
                         <br><br>
                         <input type="submit" value="Enviar">
@@ -58,7 +58,7 @@
             </div>
             <div class="muestra">
                 <section>
-                    <h2>Un ejemplo de como se ve el formato del archivo para convertirlo a .csv</h2>
+                    <h4>Un ejemplo de como se ve el formato del archivo para convertirlo a .csv</h4>
                     <img class="ejemplo" src="static/img/ejemplo.png">
                 </section>
             </div>
