@@ -88,17 +88,14 @@ def index():
 
 #Indice de ocurrencia
     ocurrenciaRF=accuracy_score(YRF_test, YRF_prdss)
-    print("El porcentaje de efectividad de random forest es: ", ocurrenciaRF)
 
 
 # se crea un dataframe para comparar con lso valores reales
-    print("* Datos de Randon Forest")
+
     rtaRF = pd.DataFrame({'real': YRF_test,'predicciones': YRF_prdss})
 
 
     lista=[YRF_test]
-
-    print(rtaRF)
 
     # *******************************************************************************************************************************************************************
 # Support Vector Machines
@@ -115,17 +112,14 @@ def index():
 
     clf = SVC(kernel = 'linear').fit(XMVS_train, YMVS_train)
     ocurrenciaMVS=clf.score(XMVS_test, YMVS_test)
-    print("El porcentaje de efectividad del modelo Support Vector Machines es: ", ocurrenciaMVS)
+
 
     YMVS_pred = clf.predict(XMVS_test)
 
 # Calculo de la matriz de correlación
     correlation_matrix = datos.corr()
 
-    print("* Datos de Support Vector Machines")
     RTAMVS = pd.DataFrame({'Real': YMVS_test,'Predicho': YMVS_pred})
-
-    print(RTAMVS)
 
 
 # ***************************************************************************************************************************************
@@ -159,7 +153,6 @@ def index():
 # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.20, random_state = 6)
     XNV_train, XNV_test, y_train, y_test = train_test_split(XNV,y, test_size = 0.2, random_state = 6)
 
-
 # Normalizacion de la data
 
     bayes_naive = GaussianNB()
@@ -170,11 +163,7 @@ def index():
 #Indice de ocurrencia
     ocurrenciaNV=accuracy_score(y_test, y_pred)
 
-    print("El porcentaje de efectividad de Naive Bayes es: ", ocurrenciaNV)
-
     RTANV = pd.DataFrame({'Real': y_test,'Predicho': y_pred})
-
-    print(RTANV)
 
     resultadosDb = {
         'realRF':YRF_test,
@@ -189,19 +178,17 @@ def index():
         }
     #Comparacion de los modelos con el modelo Lupo
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    print("El tipo de dato es: ", type(YRF_prdss))
-    print("El valor el la posicion es: ", YRF_prdss[0])
-    print("El tamaño es: ",len(YRF_prdss))
-    print("El tamaño es: ",len(YMVS_pred))
-    print("El tamaño es: ",len(y_pred))
     #Guardar la cantidad de resultados generados por los algoritmos
     TamaA=len(YRF_prdss)
     #Crear un bucle Que permita leer cada dato
     lupo = []
     ni=0
+    #Configuración del grado de ocurrencia tolerado para la comparacion de lupo
+    ocurrenciaAdimitica=0.65
     while ni<TamaA:
         #Comparar ocurrencia para generar nuevos resultados
-        if(ocurrenciaRF>0.60 and ocurrenciaMVS>0.60 and ocurrenciaNV>0.60):
+        # RF=1 MVS=1 NV=1
+        if(ocurrenciaRF>ocurrenciaAdimitica and ocurrenciaMVS>ocurrenciaAdimitica and ocurrenciaNV>ocurrenciaAdimitica):
             if(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==1):
                 lupo.append(1)
             elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==1):
@@ -220,29 +207,220 @@ def index():
                 lupo.append(0)
             else:
                 print("no concuerda")
+        # RF=0 MVS=1 NV=1
+        elif(ocurrenciaRF<ocurrenciaAdimitica and ocurrenciaMVS>ocurrenciaAdimitica and ocurrenciaNV>ocurrenciaAdimitica):
+            if(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                if(ocurrenciaMVS>ocurrenciaNV):
+                    lupo.append(0)
+                else:
+                    lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                if(ocurrenciaMVS>ocurrenciaNV):
+                    lupo.append(1)
+                else:
+                    lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                if(ocurrenciaMVS>ocurrenciaNV):
+                    lupo.append(1)
+                else:
+                    lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                if(ocurrenciaMVS>ocurrenciaNV):
+                    lupo.append(0)
+                else:
+                    lupo.append(1)
+            else:
+                print("no concuerda")
+        # RF=1 MVS=0 NV=1
+        elif(ocurrenciaRF>ocurrenciaAdimitica and ocurrenciaMVS<ocurrenciaAdimitica and ocurrenciaNV>ocurrenciaAdimitica):
+            if(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                if(ocurrenciaRF>ocurrenciaNV):
+                    lupo.append(0)
+                else:
+                    lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                if(ocurrenciaRF>ocurrenciaNV):
+                    lupo.append(1)
+                else:
+                    lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                if(ocurrenciaRF>ocurrenciaNV):
+                    lupo.append(1)
+                else:
+                    lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                if(ocurrenciaRF>ocurrenciaNV):
+                    lupo.append(0)
+                else:
+                    lupo.append(1)
+        # RF=1 MVS=1 NV=0
+        elif(ocurrenciaRF>ocurrenciaAdimitica and ocurrenciaMVS>ocurrenciaAdimitica and ocurrenciaNV<ocurrenciaAdimitica):
+            if(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                if(ocurrenciaRF>ocurrenciaMVS):
+                    lupo.append(0)
+                else:
+                    lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                if(ocurrenciaRF>ocurrenciaMVS):
+                    lupo.append(1)
+                else:
+                    lupo.append(0)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                if(ocurrenciaRF>ocurrenciaMVS):
+                    lupo.append(1)
+                else:
+                    lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                if(ocurrenciaRF>ocurrenciaMVS):
+                    lupo.append(0)
+                else:
+                    lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                lupo.append(0)
+            else:
+                print("no concuerda")
+        # RF> MVS and NV
+        elif(ocurrenciaRF>ocurrenciaAdimitica and ocurrenciaMVS<ocurrenciaAdimitica and ocurrenciaNV<ocurrenciaAdimitica):
+            if(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                lupo.append(0)
+            else:
+                print("no concuerda")
+        # MVS> RF and NV
+        elif(ocurrenciaRF<ocurrenciaAdimitica and ocurrenciaMVS>ocurrenciaAdimitica and ocurrenciaNV<ocurrenciaAdimitica):
+            if(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                lupo.append(0)
+            else:
+                print("no concuerda")
+        # NV> RF and MVS
+        elif(ocurrenciaRF<ocurrenciaAdimitica and ocurrenciaMVS<ocurrenciaAdimitica and ocurrenciaNV>ocurrenciaAdimitica):
+            if(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                lupo.append(1)
+            else:
+                print("no concuerda")
+        #else final
         else:
             print("No concuerda el valor")
         ni=ni+1
-
-    print(lupo)
-    print("El tamaño es: ",len(lupo))
-    ocurrenciaLupo=accuracy_score(y_test, lupo)
-
-    print("El porcentaje de efectividad de Lupo es: ", ocurrenciaLupo)
-
+    #Utilizacion del documento para extraer datos de fecha y hora
+    # predicciones con el nuevo modelo con recolección de datos desde una DB Remota de mongo
+    BusquedaMongo = f'mongodb+srv://Lupo:precipitacionUDEC@cluster0.0s3yt3s.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp' # Your connection uri
+    cliente = MongoClient(BusquedaMongo)
+    # Se utiliza una base de datos de prueba con solo valores numericos
+    bd = cliente.get_database('bd_Precipitaciones')
+    coleccion = bd.get_collection('Datos')
+    # Obtener un DataF con la colección completa:
+    DataF = pd.DataFrame(list(coleccion.find()))
+    DataF.drop('T', inplace=True, axis=1)
+    DataF.drop('Po', inplace=True, axis=1)
+    DataF.drop('U', inplace=True, axis=1)
+    DataF.drop('Ff', inplace=True, axis=1)
+    DataF.drop('RRR', inplace=True, axis=1)
+    DataF.drop('_id', inplace=True, axis=1)
+    DataF.to_csv('./src/fechayhora/FechayHora.csv', index=False)
+    #Ocurrencia de Lupo
+    ocurrenciaLupo=accuracy_score(YMVS_test, lupo)
     #muestreo de datos del ultimo dato
+    FeyHo = pd.read_csv('./src/fechayhora/FechayHora.csv', header=None, skiprows=1)
+    Ffecha = FeyHo.iloc[0,0]
+    Hhora = FeyHo.iloc[0,1]
+    # Eleccion del algorimo que va a dar el resultado de la predicción
 
-    precipitaciones = con_bd['Datos']
-    PrecipitacionesRegistradas=precipitaciones['fecha'].find()
 
     lluvia=""
-    if(lupo[TamaA-1]==1):
-        lluvia="Si llovera"
+    # Lupo>RF and MVS and NV
+    if(ocurrenciaLupo>ocurrenciaRF and ocurrenciaLupo>ocurrenciaMVS and ocurrencialupo>ocurrenciaNV):
+        if(lupo[TamaA-1]==1):
+            lluvia="llovera"
+        else:
+            lluvia="No llovera"
+    # RF>Lupo and MVS and NV
+    elif(ocurrenciaRF>ocurrenciaLupo and ocurrenciaRF>ocurrenciaMVS and ocurrenciaRF>ocurrenciaNV):
+        if(YRF_prdss[TamaA-1]==1):
+            lluvia="llovera"
+        else:
+            lluvia="No llovera"
+    # MVS>Lupo and RF and NV
+    elif(ocurrenciaMVS>ocurrenciaLupo and ocurrenciaMVS>ocurrenciaRF and ocurrenciaMVS>ocurrenciaNV):
+        if(YMVS_pred[TamaA-1]==1):
+            lluvia="llovera"
+        else:
+            lluvia="No llovera"
+    # NV>Lupo and RF and MVS
+    elif(ocurrenciaNV>ocurrenciaLupo and ocurrenciaNV>ocurrenciaRF and ocurrenciaNV>ocurrenciamVS):
+        if(y_pred[TamaA-1]==1):
+            lluvia="llovera"
+        else:
+            lluvia="No llovera"
+    # NV==Lupo == RF == MVS
     else:
-        lluvia="No llovera"
-
-
-
+        if(YMVS_pred[TamaA-1]==1):
+            lluvia="llovera"
+        else:
+            lluvia="No llovera"
 
     resultadosDb = {
         'realRF':YRF_test,
@@ -257,14 +435,16 @@ def index():
         'LupoRTA':lupo,
         'LupoOcurrencia':ocurrenciaLupo,
         'lluvia':lluvia,
-        'precipitaciones': PrecipitacionesRegistradas
+        'FFecha': Ffecha,
+        'HHora':Hhora
         }
-    
-
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     #return "<h2> {%lista%} </h2>"
     return render_template('index.html',Predicciones=resultadosDb)
+
+
+#///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #*****************************************************************************************************************************************************************************************************
 
@@ -409,6 +589,203 @@ def procesoAlgoritmo():
 
     print(RTANV)
 
+
+
+
+    #Comparacion de los modelos con el modelo Lupo
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    #Guardar la cantidad de resultados generados por los algoritmos
+    TamaA=len(YRF_prdss)
+    #Crear un bucle Que permita leer cada dato
+    lupo = []
+    ni=0
+    #Configuración del grado de ocurrencia tolerado para la comparacion de lupo
+    ocurrenciaAdimitica=0.60
+    while ni<TamaA:
+        #Comparar ocurrencia para generar nuevos resultados
+        # RF=1 MVS=1 NV=1
+        if(ocurrenciaRF>ocurrenciaAdimitica and ocurrenciaMVS>ocurrenciaAdimitica and ocurrenciaNV>ocurrenciaAdimitica):
+            if(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                lupo.append(0)
+            else:
+                print("no concuerda")
+        # RF=0 MVS=1 NV=1
+        elif(ocurrenciaRF<ocurrenciaAdimitica and ocurrenciaMVS>ocurrenciaAdimitica and ocurrenciaNV>ocurrenciaAdimitica):
+            if(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                if(ocurrenciaMVS>ocurrenciaNV):
+                    lupo.append(0)
+                else:
+                    lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                if(ocurrenciaMVS>ocurrenciaNV):
+                    lupo.append(1)
+                else:
+                    lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                if(ocurrenciaMVS>ocurrenciaNV):
+                    lupo.append(1)
+                else:
+                    lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                if(ocurrenciaMVS>ocurrenciaNV):
+                    lupo.append(0)
+                else:
+                    lupo.append(1)
+            else:
+                print("no concuerda")
+        # RF=1 MVS=0 NV=1
+        elif(ocurrenciaRF>ocurrenciaAdimitica and ocurrenciaMVS<ocurrenciaAdimitica and ocurrenciaNV>ocurrenciaAdimitica):
+            if(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                if(ocurrenciaRF>ocurrenciaNV):
+                    lupo.append(0)
+                else:
+                    lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                if(ocurrenciaRF>ocurrenciaNV):
+                    lupo.append(1)
+                else:
+                    lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                if(ocurrenciaRF>ocurrenciaNV):
+                    lupo.append(1)
+                else:
+                    lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                if(ocurrenciaRF>ocurrenciaNV):
+                    lupo.append(0)
+                else:
+                    lupo.append(1)
+        # RF=1 MVS=1 NV=0
+        elif(ocurrenciaRF>ocurrenciaAdimitica and ocurrenciaMVS>ocurrenciaAdimitica and ocurrenciaNV<ocurrenciaAdimitica):
+            if(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                if(ocurrenciaRF>ocurrenciaMVS):
+                    lupo.append(0)
+                else:
+                    lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                if(ocurrenciaRF>ocurrenciaMVS):
+                    lupo.append(1)
+                else:
+                    lupo.append(0)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                if(ocurrenciaRF>ocurrenciaMVS):
+                    lupo.append(1)
+                else:
+                    lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                if(ocurrenciaRF>ocurrenciaMVS):
+                    lupo.append(0)
+                else:
+                    lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                lupo.append(0)
+            else:
+                print("no concuerda")
+        # RF> MVS and NV
+        elif(ocurrenciaRF>ocurrenciaAdimitica and ocurrenciaMVS<ocurrenciaAdimitica and ocurrenciaNV<ocurrenciaAdimitica):
+            if(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                lupo.append(0)
+            else:
+                print("no concuerda")
+        # MVS> RF and NV
+        elif(ocurrenciaRF<ocurrenciaAdimitica and ocurrenciaMVS>ocurrenciaAdimitica and ocurrenciaNV<ocurrenciaAdimitica):
+            if(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                lupo.append(0)
+            else:
+                print("no concuerda")
+        # NV> RF and MVS
+        elif(ocurrenciaRF<ocurrenciaAdimitica and ocurrenciaMVS<ocurrenciaAdimitica and ocurrenciaNV>ocurrenciaAdimitica):
+            if(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                lupo.append(1)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==1 and YMVS_pred[ni]==0 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==1 and y_pred[ni]==0):
+                lupo.append(0)
+            elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==1):
+                lupo.append(1)
+            else:
+                print("no concuerda")
+        #else final
+        else:
+            print("No concuerda el valor")
+        ni=ni+1
+    
+    #Ocurrencia de Lupo
+    ocurrenciaLupo=accuracy_score(YMVS_test, lupo)
+
+
     resultados = {
         'realRF':YRF_test,
         'prediccionesRF':YRF_prdss,
@@ -418,7 +795,9 @@ def procesoAlgoritmo():
         'PorcentajeMVS':ocurrenciaMVS,
         'realNV':y_test,
         'prediccionesNV':y_pred,
-        'PorcentajeNV':ocurrenciaNV
+        'PorcentajeNV':ocurrenciaNV,
+        'Modelolupo':lupo,
+        'OcurrenciaLupo':ocurrenciaLupo
         }
     #return "<h2> {%lista%} </h2>"
     return render_template('ResultadoModelo.html', datos=resultados)

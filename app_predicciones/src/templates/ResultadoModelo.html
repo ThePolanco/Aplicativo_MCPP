@@ -72,6 +72,18 @@
                     </ul>
                 </div>
             </section>
+
+            <section class="area_modelo">
+                <div class="card text-bg-info">
+                    <h2>Tu porcentaje de efectividad segun el modelo Lupo <i class="fas fa-tree"></i></h2>
+                    <p class="porciento">{{ datos.OcurrenciaLupo * 100 }}%</p>
+                    <h3>Tus predicciones son:</h3>
+                    <ul>
+                        <p>{{ datos.Modelolupo }}</p>
+                    </ul>
+                </div>
+            </section>
+
             <section class="area_modelo">
                 <input class="boton" type="submit" value="Matriz de correlacion" name="MatrizCorrelación" onclick="location.href='/Mcorrelacion'">
                 <input class="boton" type="submit" value="Grafico De Variables" name="GraficoVariables" onclick="location.href=('/GraficoDT')">
