@@ -392,7 +392,7 @@ def index():
 
     lluvia=""
     # Lupo>RF and MVS and NV
-    if(ocurrenciaLupo>ocurrenciaRF and ocurrenciaLupo>ocurrenciaMVS and ocurrencialupo>ocurrenciaNV):
+    if(ocurrenciaLupo>ocurrenciaRF and ocurrenciaLupo>ocurrenciaMVS and ocurrenciaLupo>ocurrenciaNV):
         if(lupo[TamaA-1]==1):
             lluvia="Llovera"
         else:
@@ -410,7 +410,7 @@ def index():
         else:
             lluvia="No llovera"
     # NV>Lupo and RF and MVS
-    elif(ocurrenciaNV>ocurrenciaLupo and ocurrenciaNV>ocurrenciaRF and ocurrenciaNV>ocurrenciamVS):
+    elif(ocurrenciaNV>ocurrenciaLupo and ocurrenciaNV>ocurrenciaRF and ocurrenciaNV>ocurrenciaMVS):
         if(y_pred[TamaA-1]==1):
             lluvia="Llovera"
         else:
