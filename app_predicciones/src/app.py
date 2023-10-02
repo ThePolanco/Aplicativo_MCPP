@@ -385,8 +385,8 @@ def index():
     ocurrenciaLupo=accuracy_score(YMVS_test, lupo)
     #muestreo de datos del ultimo dato
     FeyHo = pd.read_csv('./src/fechayhora/FechayHora.csv', header=None, skiprows=1)
-    Ffecha = FeyHo.iloc[0,0]
-    Hhora = FeyHo.iloc[0,1]
+    Ffecha = FeyHo.iloc[-1,0]
+    Hhora = FeyHo.iloc[-1,1]
     # Eleccion del algorimo que va a dar el resultado de la predicción
 
 
