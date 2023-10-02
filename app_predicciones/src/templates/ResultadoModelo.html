@@ -42,51 +42,43 @@
         </header>
         <div class="contenedor_result">
             <section class="area_modelo">
-                <div class="card text-bg-info">
-                    <h2>Tu porcentaje de efectividad segun el modelo Random Forest <i class="fas fa-tree"></i></h2>
-                    <p class="porciento">{{ datos.PorcentajeRF * 100 }}%</p>
-                    <h3>Tus predicciones son:</h3>
-                    <ul>
-                        <p>{{ datos.prediccionesRF }}</p>
-                    </ul>
-                </div>
+                <h2>Tu porcentaje de efectividad segun el modelo Random Forest <i class="fas fa-tree"></i></h2>
+                <p class="porciento">{{ datos.PorcentajeRF * 100 }}%</p>
+                <h3>Tus predicciones son:</h3>
+                <ul>
+                    <p>{{ datos.prediccionesRF }}</p>
+                </ul> 
             </section>
             
-            <section class="area_modelo">
-                <div class="card text-bg-info">
-                    <h2></i>Tu porcentaje de efectividad segun el modelo Máquina de Vector Soporte<i class="fas fa-sitemap"></i></h2>
-                    <p class="porciento">{{ datos.PorcentajeMVS * 100 }}%</p>
-                    <h3>Tus predicciones son:</h3>
-                    <ul>
-                        <p>{{ datos.prediccionesMVS }}</p>
-                    </ul>
-                </div>
+            <section class="area_modelo1">
+                <h2></i>Tu porcentaje de efectividad segun el modelo Máquina de Vector Soporte<i class="fas fa-sitemap"></i></h2>
+                <p class="porciento">{{ datos.PorcentajeMVS * 100 }}%</p>
+                <h3>Tus predicciones son:</h3>
+                <ul>
+                    <p>{{ datos.prediccionesMVS }}</p>
+                </ul>
             </section>
-            <section class="area_modelo">
-                <div class="card text-bg-info">
-                    <h2></i>Tu porcentaje de efectividad segun el modelo Naive Bayes<i class="fas fa-calculator"></i></h2>
-                    <p class="porciento">{{ datos.PorcentajeNV * 100 }}%</p>
-                    <h3>Tus predicciones son:</h3>
-                    <ul>
-                        <p>{{ datos.prediccionesNV }}</p>
-                    </ul>
-                </div>
+            <section class="area_modelo2">
+                <h2></i>Tu porcentaje de efectividad segun el modelo Naive Bayes<i class="fas fa-calculator"></i></h2>
+                <p class="porciento">{{ datos.PorcentajeNV * 100 }}%</p>
+                <h3>Tus predicciones son:</h3>
+                <ul>
+                    <p>{{ datos.prediccionesNV }}</p>
+                </ul>
             </section>
 
-            <section class="area_modelo">
-                <div class="card text-bg-info">
-                    <h2>Tu porcentaje de efectividad segun el modelo Lupo <i class="fas fa-tree"></i></h2>
-                    <p class="porciento">{{ datos.OcurrenciaLupo * 100 }}%</p>
-                    <h3>Tus predicciones son:</h3>
-                    <ul>
-                        <p>{{ datos.Modelolupo }}</p>
-                    </ul>
-                </div>
+            <section class="area_modelo3">     
+                <h2>Tu porcentaje de efectividad segun el modelo Lupo <i class="fas fa-tree"></i></h2>
+                <p class="porciento">{{ datos.OcurrenciaLupo * 100 }}%</p>
+                <h3>Tus predicciones son:</h3>
+                <ul>
+                    <p>{{ datos.Modelolupo }}</p>
+                </ul>
             </section>
 
-            <section class="area_modelo">
-                <input class="boton" type="submit" value="Matriz de correlacion" name="MatrizCorrelación" onclick="location.href='/Mcorrelacion'">
-                <input class="boton" type="submit" value="Grafico De Variables" name="GraficoVariables" onclick="location.href=('/GraficoDT')">
+            <section class="area_modelo4">
+                <input class="btn btn-success" type="submit" value="Matriz de correlacion" name="MatrizCorrelación" onclick="location.href='/Mcorrelacion'">
+                <input class="btn btn-success" type="submit" value="Grafico De Variables" name="GraficoVariables" onclick="location.href=('/GraficoDT')">
             </section>
         </div>
         <footer class="container py-5">

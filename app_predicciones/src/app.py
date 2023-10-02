@@ -394,31 +394,31 @@ def index():
     # Lupo>RF and MVS and NV
     if(ocurrenciaLupo>ocurrenciaRF and ocurrenciaLupo>ocurrenciaMVS and ocurrencialupo>ocurrenciaNV):
         if(lupo[TamaA-1]==1):
-            lluvia="llovera"
+            lluvia="Llovera"
         else:
             lluvia="No llovera"
     # RF>Lupo and MVS and NV
     elif(ocurrenciaRF>ocurrenciaLupo and ocurrenciaRF>ocurrenciaMVS and ocurrenciaRF>ocurrenciaNV):
         if(YRF_prdss[TamaA-1]==1):
-            lluvia="llovera"
+            lluvia="Llovera"
         else:
             lluvia="No llovera"
     # MVS>Lupo and RF and NV
     elif(ocurrenciaMVS>ocurrenciaLupo and ocurrenciaMVS>ocurrenciaRF and ocurrenciaMVS>ocurrenciaNV):
         if(YMVS_pred[TamaA-1]==1):
-            lluvia="llovera"
+            lluvia="Llovera"
         else:
             lluvia="No llovera"
     # NV>Lupo and RF and MVS
     elif(ocurrenciaNV>ocurrenciaLupo and ocurrenciaNV>ocurrenciaRF and ocurrenciaNV>ocurrenciamVS):
         if(y_pred[TamaA-1]==1):
-            lluvia="llovera"
+            lluvia="Llovera"
         else:
             lluvia="No llovera"
     # NV==Lupo == RF == MVS
     else:
         if(YMVS_pred[TamaA-1]==1):
-            lluvia="llovera"
+            lluvia="Llovera"
         else:
             lluvia="No llovera"
 
@@ -498,7 +498,7 @@ def procesoAlgoritmo():
 
 #Indice de ocurrencia
     ocurrenciaRF=accuracy_score(YRF_test, YRF_prdss)
-    print("El porcentaje de efectividad de random forest es: ", ocurrenciaRF)
+    print("El porcentaje de efectividad de Random Forest es: ", ocurrenciaRF)
 
 
 # se crea un dataframe para comparar con lso valores reales
@@ -528,7 +528,7 @@ def procesoAlgoritmo():
 
     clf = SVC(kernel = 'linear').fit(XMVS_train, YMVS_train)
     ocurrenciaMVS=clf.score(XMVS_test, YMVS_test)
-    print("El porcentaje de efectividad del modelo Support Vector Machines es: ", ocurrenciaMVS)
+    print("El porcentaje de efectividad del modelo Support Vector Machine es: ", ocurrenciaMVS)
 
     YMVS_pred = clf.predict(XMVS_test)
 
@@ -622,7 +622,7 @@ def procesoAlgoritmo():
             elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==1):
                 lupo.append(0)
             else:
-                print("no concuerda")
+                print("No concuerda")
         # RF=0 MVS=1 NV=1
         elif(ocurrenciaRF<ocurrenciaAdimitica and ocurrenciaMVS>ocurrenciaAdimitica and ocurrenciaNV>ocurrenciaAdimitica):
             if(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==1):
@@ -654,7 +654,7 @@ def procesoAlgoritmo():
                 else:
                     lupo.append(1)
             else:
-                print("no concuerda")
+                print("No concuerda")
         # RF=1 MVS=0 NV=1
         elif(ocurrenciaRF>ocurrenciaAdimitica and ocurrenciaMVS<ocurrenciaAdimitica and ocurrenciaNV>ocurrenciaAdimitica):
             if(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==1):
@@ -716,7 +716,7 @@ def procesoAlgoritmo():
             elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==1):
                 lupo.append(0)
             else:
-                print("no concuerda")
+                print("No concuerda")
         # RF> MVS and NV
         elif(ocurrenciaRF>ocurrenciaAdimitica and ocurrenciaMVS<ocurrenciaAdimitica and ocurrenciaNV<ocurrenciaAdimitica):
             if(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==1):
@@ -736,7 +736,7 @@ def procesoAlgoritmo():
             elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==1):
                 lupo.append(0)
             else:
-                print("no concuerda")
+                print("No concuerda")
         # MVS> RF and NV
         elif(ocurrenciaRF<ocurrenciaAdimitica and ocurrenciaMVS>ocurrenciaAdimitica and ocurrenciaNV<ocurrenciaAdimitica):
             if(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==1):
@@ -756,7 +756,7 @@ def procesoAlgoritmo():
             elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==1):
                 lupo.append(0)
             else:
-                print("no concuerda")
+                print("No concuerda")
         # NV> RF and MVS
         elif(ocurrenciaRF<ocurrenciaAdimitica and ocurrenciaMVS<ocurrenciaAdimitica and ocurrenciaNV>ocurrenciaAdimitica):
             if(YRF_prdss[ni]==1 and YMVS_pred[ni]==1 and y_pred[ni]==1):
@@ -776,7 +776,7 @@ def procesoAlgoritmo():
             elif(YRF_prdss[ni]==0 and YMVS_pred[ni]==0 and y_pred[ni]==1):
                 lupo.append(1)
             else:
-                print("no concuerda")
+                print("No concuerda")
         #else final
         else:
             print("No concuerda el valor")
