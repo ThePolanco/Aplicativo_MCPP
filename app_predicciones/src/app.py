@@ -97,7 +97,7 @@ def index():
 
     lista=[YRF_test]
 
-    # *******************************************************************************************************************************************************************
+    # *******************************************************
 # Support Vector Machines
     datos=pd.read_csv('./src/ArchivoCSV_Mongo/filename.csv', header=None, skiprows=1)
 
@@ -122,7 +122,7 @@ def index():
     RTAMVS = pd.DataFrame({'Real': YMVS_test,'Predicho': YMVS_pred})
 
 
-# ***************************************************************************************************************************************
+# *********************************************
 
 
 
@@ -387,6 +387,7 @@ def index():
     FeyHo = pd.read_csv('./src/fechayhora/FechayHora.csv', header=None, skiprows=1)
     Ffecha = FeyHo.iloc[-1,0]
     Hhora = FeyHo.iloc[-1,1]
+    Ifecha = FeyHo.iloc[0,0]
     # Eleccion del algorimo que va a dar el resultado de la predicción
 
 
@@ -436,17 +437,23 @@ def index():
         'LupoOcurrencia':ocurrenciaLupo,
         'lluvia':lluvia,
         'FFecha': Ffecha,
+        'IFecha': Ifecha,
         'HHora':Hhora
         }
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     #return "<h2> {%lista%} </h2>"
-    return render_template('index.html',Predicciones=resultadosDb)
+    #Visualización de los ultimos diez datos utilizados en laas predicciones
+    precipitaciones = con_bd['Datos']
+    # Limita la consulta a los últimos 10 registros
+    PrecipitacionesRegistradas = precipitaciones.find().sort("_id", -1).limit(10)
+
+    return render_template('index.html',Predicciones=resultadosDb,precipitaciones=PrecipitacionesRegistradas)
 
 
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#*****************************************************************************************************************************************************************************************************
+#*******************************************************************
 
 # Ruta para la pantalla de probar modelo
 @app.route('/prueba')
@@ -510,7 +517,7 @@ def procesoAlgoritmo():
 
     print(rtaRF)
 
-    # *******************************************************************************************************************************************************************
+    # *******************************************************
 # Support Vector Machines
     datos=pd.read_csv('./src/Archivos csv/archivo.csv', sep=',', header=None)
 
@@ -541,7 +548,7 @@ def procesoAlgoritmo():
     print(RTAMVS)
 
 
-# ***************************************************************************************************************************************
+# *********************************************
 
 
 
@@ -800,17 +807,27 @@ def procesoAlgoritmo():
         'OcurrenciaLupo':ocurrenciaLupo
         }
     #return "<h2> {%lista%} </h2>"
+
     return render_template('ResultadoModelo.html', datos=resultados)
 
 
-#*****************************************************************************************************************************************************************************************************
+#*******************************************************************
 con_bd = Conexion()
 #Ruta para la pantalla de datos donde se muestra toda la Data
 @app.route('/datos')
 def datos():
     precipitaciones = con_bd['Datos']
-    PrecipitacionesRegistradas=precipitaciones.find()
-    return render_template('datos.html', precipitaciones = PrecipitacionesRegistradas)
+    # Limita la consulta a los últimos 10 registros
+    PrecipitacionesRegistradas = precipitaciones.find()
+    FeyHo = pd.read_csv('./src/fechayhora/FechayHora.csv', header=None, skiprows=1)
+    Ffecha = FeyHo.iloc[-1,0]
+    Ifecha = FeyHo.iloc[0,0]
+    Fechas = {
+        'FFecha': Ffecha,
+        'IFecha': Ifecha
+        }
+
+    return render_template('datos.html', precipitaciones=PrecipitacionesRegistradas, IFFecha=Fechas)
 
 #Ruta para la pantalla de datos donde se muestra la data consultada
 @app.route('/fechaBuscada',methods = ['POST'])

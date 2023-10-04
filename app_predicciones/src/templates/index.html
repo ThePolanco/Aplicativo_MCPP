@@ -142,6 +142,67 @@
                 </div>    
             </div>
         </div>
+        <!--Area para mostrar ultimos diez datos de la DB-->
+        <div class="contenedor_datos">
+            <div class="area_historico">
+                    <article class="zona_graficos">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <!--Ciudades mayores de colombia segun DNP:https://2022.dnp.gov.co/Paginas/DNP-definió-seis-categorías-de-ciudades-colombianas-de-acuerdo-a-la-edad-de-sus-habitantes.aspx#:~:text=Bogotá%2C%20Pereira%2C%20Manizales%20y%20Tunja,categorizadas%20como%20ciudades%20%27embrionarias%27. -->
+                        <div id="idf2f9df539898d" a='{"t":"b","v":"1.2","lang":"es","locs":[349,350,3866,3859,3860],"ssot":"c","sics":"ds","cbkg":"#616161","cfnt":"#FFFFFF","ceb":"#FFFFFF","cef":"#000000","slfs":20,"slbr":1,"slmw":300}'><a href="https://sharpweather.com/es/widgets/">HTML Widget tiempo</a> para el sitio web de sharpweather.com</div><script async src="https://static1.sharpweather.com/widgetjs/?id=idf2f9df539898d"></script>
+                    </article>
+            </div>
+            <div class="area_graficos">
+                <article>
+                    <section class="zona_historico">
+                        <h2 class="titulo">Ultimos diez datos utilizados para las predicciones</h2>
+                        
+                        <!--
+                            Se utiliza jinja2 para hacer la visualización y correspondiente actualización de los datos mediante un for que recorra todas nuestras colecciones
+                        -->
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <td scope="col">Fecha</td>
+                                    <td scope="col">Hora</td>
+                                    <td scope="col">
+                                        <abbr title="Presión Atmosférica(mm)">Po</abbr>
+                                    </td>
+                                    <td scope="col">
+                                        <abbr title="Temperatura(°C)">T</abbr>
+                                    </td>
+                                    <td scope="col">
+                                        <abbr title="Humedad Relativa(%)">U</abbr>
+                                    </td>
+                                    <td scope="col">
+                                        <abbr title="Velocidad del viento(m/s)">Ff</abbr>
+                                    </td>
+                                    <td scope="col">
+                                        <abbr title="Precipitaciones(mm)">RRR</abbr>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {%for precipitacion in precipitaciones %}
+                                <tr>
+                                    <td>{{precipitacion.fecha}}</td>
+                                    <td>{{precipitacion.hora}}</td>
+                                    <td>{{precipitacion.Po}}</td>
+                                    <td>{{precipitacion.T}}</td>
+                                    <td>{{precipitacion.U}}</td>
+                                    <td>{{precipitacion.Ff}}</td>
+                                    <td>{{precipitacion.RRR}}</td>
+                                </tr>
+                                {%endfor%}
+                            </tbody>
+                        </table>
+                    </section>
+                </article>
+            </div>
+        </div>
         <div class="contenedor_info">
             <!--Referencia: https://www.zeitverschiebung.net/es/-->
             <div style="text-align:center;padding:1em 0;"> <h3><a style="text-decoration:none;" href="https://www.zeitverschiebung.net/es/city/3666519"><span style="color:gray;">Hora actual en</span><br />Villa de San Diego de Ubaté, Colombia</a></h3> <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=es&size=medium&timezone=America%2FBogota" width="100%" height="115" frameborder="0" seamless></iframe></div>
