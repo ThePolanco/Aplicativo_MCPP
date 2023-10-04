@@ -17,10 +17,10 @@
             <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
                 <div class="container-fluid">
                     <img class="escudo" 
-                        src="{{ url_for('static', filename = 'img/escudo1.png') }}" 
-                        alt="UdeC Simbolo 1" 
+                        src="{{ url_for('static', filename = 'img/MCPP.png') }}" 
+                        alt="Logo" 
                         style="display: inline-block; max-width: 5%; height: auto;">
-                    <h1 class="display-5 text-center" style="color: white;">¡Bienvenido al modelo LUPO!</h1>
+                    <abbr title="Modelo Comparativo Predictivo de Precipitaciones"><h1 class="display-5 text-center" style="color: white;">¡Bienvenido al modelo MCPP!</h1></abbr>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -43,6 +43,7 @@
                 </div>
             </nav>
         </header>
+        <!--Contenedor de información-->
 
         <!--Cuerpo del index-->
         <div class="contenedor">
@@ -96,7 +97,7 @@
                             </div>
                             <div class="carousel-item">
                                 <section class="area_model">
-                                    <h4></i>Lupo</h4>
+                                    <h4></i>MCPP</h4>
                                     <p class="porciento">{{ Predicciones.LupoOcurrencia * 100 }}%</p>
                                     <h5>Las predicciones son:</h5>
                                     <ul>
@@ -117,7 +118,6 @@
                 </article>
             </div>
         </div>      
-    
         <div class="contenedor_2">
             <div class="button1" align="center">
                 <div class="card border-info">
@@ -142,7 +142,12 @@
                 </div>    
             </div>
         </div>
-
+        <div class="contenedor_info">
+            <!--Referencia: https://www.zeitverschiebung.net/es/-->
+            <div style="text-align:center;padding:1em 0;"> <h3><a style="text-decoration:none;" href="https://www.zeitverschiebung.net/es/city/3666519"><span style="color:gray;">Hora actual en</span><br />Villa de San Diego de Ubaté, Colombia</a></h3> <iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=es&size=medium&timezone=America%2FBogota" width="100%" height="115" frameborder="0" seamless></iframe></div>
+            <!-- Referencia: https://weatherwidget.org/es/ -->
+            <div id="ww_04e52c93ec810" v='1.3' loc='id' a='{"t":"ticker","lang":"es","sl_lpl":1,"ids":["wl2768"],"font":"Arial","sl_ics":"one_a","sl_sot":"celsius","cl_bkg":"image","cl_font":"#FFFFFF","cl_cloud":"#FFFFFF","cl_persp":"#81D4FA","cl_sun":"#FFC107","cl_moon":"#FFC107","cl_thund":"#FF5722"}'>Más previsiones: <a href="https://wetterlang.de/berlin_wetter_14_tage/" id="ww_04e52c93ec810_u" target="_blank">wetterlang.de</a></div><script async src="https://app2.weatherwidget.org/js/?id=ww_04e52c93ec810"></script>
+            <!--<div id="ww_469873414883a" v='1.3' loc='auto' a='{"t":"responsive","lang":"es","sl_lpl":1,"ids":["wl2768"],"font":"Arial","sl_ics":"one_a","sl_sot":"celsius","cl_bkg":"image","cl_font":"#FFFFFF","cl_cloud":"#FFFFFF","cl_persp":"#81D4FA","cl_sun":"#FFC107","cl_moon":"#FFC107","cl_thund":"#FF5722"}'><a href="https://sharpweather.com/es/widgets/" id="ww_469873414883a_u" target="_blank">Widget de tiempo</a></div><script async src="https://app2.weatherwidget.org/js/?id=ww_469873414883a"></script>-->
         <!--Parte inferior del index-->
         <footer class="container py-5">
             <div class="row">
@@ -164,6 +169,7 @@
                 <div class="col-6 col-md">
                     <h5>Recursos</h5>
                         <ul class="list-unstyled text-small">
+                        <li><a class="link-secondary text-decoration-none" href="#">Manual de usuario</a></li>
                         <li><a class="link-secondary text-decoration-none" href="#">Documentación</a></li>
                         <li><a class="link-secondary text-decoration-none" href="#">Articulo modelos</a></li>
                         </ul>
@@ -178,7 +184,6 @@
             </div>
         </footer>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>

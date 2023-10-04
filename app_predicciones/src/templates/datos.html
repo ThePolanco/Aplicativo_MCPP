@@ -14,10 +14,10 @@
             <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
                 <div class="container-fluid">
                     <img class="escudo" 
-                        src="{{ url_for('static', filename = 'img/escudo1.png') }}" 
+                        src="{{ url_for('static', filename = 'img/MCPP.png') }}" 
                         alt="UdeC Simbolo 1" 
                         style="display: inline-block; max-width: 5%; height: auto;">
-                    <h1 class="display-5 text-center" style="color: white;">¡Datos historicos LUPO!</h1>
+                    <h1 class="display-5 text-center" style="color: white;">¡Datos historicos MCPP!</h1>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -43,7 +43,7 @@
         <div class="contenedor_datos">
             <div class="area_historico">
                 <div class="card text-bg-light">
-                    <article class="zona_graficos">
+                    <article class="zona_graficos">   
                         <h3 class="titulo">Filtro de predicciones por fecha</h3>
                         <p>Ingresa la fecha con formato "AAAA-MM-DD"</p>
                             <form action = "/fechaBuscada" method = "post">
@@ -67,11 +67,21 @@
                                 <tr>
                                     <td scope="col">Fecha</td>
                                     <td scope="col">Hora</td>
-                                    <td scope="col">Po</td>
-                                    <td scope="col">T</td>
-                                    <td scope="col">U</td>
-                                    <td scope="col">Ff</td>
-                                    <td scope="col">RRR</td>
+                                    <td scope="col">
+                                        <abbr title="Presión Atmosférica(mm)">Po</abbr>
+                                    </td>
+                                    <td scope="col">
+                                        <abbr title="Temperatura(°C">T</abbr>
+                                    </td>
+                                    <td scope="col">
+                                        <abbr title="Humedad Relativa(%)">U</abbr>
+                                    </td>
+                                    <td scope="col">
+                                        <abbr title="Velocidad del viento(m/s)">Ff</abbr>
+                                    </td>
+                                    <td scope="col">
+                                        <abbr title="Precipitaciones(mm)">RRR</abbr>
+                                    </td>
                                 </tr>
                             </thead>
                             <tbody>
