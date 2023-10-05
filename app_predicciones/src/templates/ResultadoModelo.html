@@ -31,9 +31,6 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="/prueba">Probar modelo</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/datos">Ver datos</a>
-                                </li>
                             </ul>
                         </ul>
                     </div>
@@ -68,7 +65,7 @@
             </section>
 
             <section class="area_modelo3">     
-                <h2>Tu porcentaje de efectividad segun el modelo Lupo <i class="fas fa-tree"></i></h2>
+                <h2>Tu porcentaje de efectividad segun el modelo MCPP <i class="fas fa-tree"></i></h2>
                 <p class="porciento">{{ datos.OcurrenciaLupo * 100 }}%</p>
                 <h3>Tus predicciones son:</h3>
                 <ul>
@@ -77,8 +74,7 @@
             </section>
 
             <section class="area_modelo4">
-                <input class="btn btn-success" type="submit" value="Matriz de correlacion" name="MatrizCorrelación" onclick="location.href='/Mcorrelacion'">
-                <input class="btn btn-success" type="submit" value="Grafico De Variables" name="GraficoVariables" onclick="location.href=('/GraficoDT')">
+                <button class="btn btn-success" type="submit"name="MatrizCorrelación" onclick="location.href='/Mcorrelacion'">matriz de Correlación</button>
             </section>
         </div>
         <footer class="container py-5">
@@ -95,7 +91,6 @@
                         <ul class="list-unstyled text-small">
                         <li><a class="link-secondary text-decoration-none" href="/">Inicio</a></li>
                         <li><a class="link-secondary text-decoration-none" href="/prueba">Probar modelo</a></li>
-                        <li><a class="link-secondary text-decoration-none" href="/datos">Ver datos</a></li>
                         </ul>
                 </div>
                 <div class="col-6 col-md">

@@ -33,10 +33,6 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="/prueba">Probar modelo</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/datos">Ver datos</a>
-                                </li>
                             </ul>
                         </ul>
                     </div>
@@ -56,6 +52,12 @@
                         <h5>En la hora: {{Predicciones.HHora}}</h5>
                         <h5>Dicen que:</h5>
                         <h1 class="porciento">{{Predicciones.lluvia}}</h1>
+                        <br>
+                        <img class="escudo" 
+                        src="{{ url_for('static', filename = 'img/MCPP.png') }}" 
+                        alt="Logo" 
+                        style="display: inline-block; max-width: 10%; height: 20%;">
+                        
                     </section>
                 </article>
             </div>
@@ -118,7 +120,7 @@
                 </article>
             </div>
         </div>      
-        <div class="contenedor_2">
+        
             <div class="button1" align="center">
                 <div class="card border-info">
                     <div class="card text-bg-light">
@@ -130,18 +132,8 @@
                     </div>
                 </div>    
             </div>
-            <div class="button2" align="center">
-                <div class="card border-info">
-                    <div class="card text-bg-light">
-                        <div class="card-body">
-                            <h5 class="card-title">Visualizar datos</h5>
-                            <p class="card-text">Visualiza los datos de la estación metereologica de la UdeC</p>
-                            <a href="/datos" class="btn btn-primary">VER</a>
-                        </div>
-                    </div>
-                </div>    
-            </div>
-        </div>
+            
+        
         <!--Area para mostrar ultimos diez datos de la DB-->
         <div class="contenedor_datos">
             <div class="area_historico">
@@ -150,15 +142,26 @@
                         <br>
                         <br>
                         <br>
+                        <h3 class="titulo">Filtro de predicciones por fecha</h3>
+                            <form action = "/fechaBuscada" method = "post">
+                                <input type="text" name="fecha" placeholder="AAAA-MM-DD">
+                                <button type = "submit">Buscar</button>
+                            </form>
                         <br>
+                        <h6>Tiempo en algunas de las ciudades "Mayores" de Colombia</h6>
                         <!--Ciudades mayores de colombia segun DNP:https://2022.dnp.gov.co/Paginas/DNP-definió-seis-categorías-de-ciudades-colombianas-de-acuerdo-a-la-edad-de-sus-habitantes.aspx#:~:text=Bogotá%2C%20Pereira%2C%20Manizales%20y%20Tunja,categorizadas%20como%20ciudades%20%27embrionarias%27. -->
                         <div id="idf2f9df539898d" a='{"t":"b","v":"1.2","lang":"es","locs":[349,350,3866,3859,3860],"ssot":"c","sics":"ds","cbkg":"#616161","cfnt":"#FFFFFF","ceb":"#FFFFFF","cef":"#000000","slfs":20,"slbr":1,"slmw":300}'><a href="https://sharpweather.com/es/widgets/">HTML Widget tiempo</a> para el sitio web de sharpweather.com</div><script async src="https://static1.sharpweather.com/widgetjs/?id=idf2f9df539898d"></script>
+                        <br>
+                        <br>
+                        <button class="btn btn-success" type="submit"name="MatrizCorrelación" onclick="location.href='/Mcorrelacion'">matriz de Correlación</button>
+                        
                     </article>
             </div>
             <div class="area_graficos">
                 <article>
                     <section class="zona_historico">
                         <h2 class="titulo">Ultimos diez datos utilizados para las predicciones</h2>
+                        <h7 class="titulo">Los datos estan tomados desde: {{Predicciones.IFecha}} hasta: {{Predicciones.FFecha}}</h7>
                         
                         <!--
                             Se utiliza jinja2 para hacer la visualización y correspondiente actualización de los datos mediante un for que recorra todas nuestras colecciones
@@ -224,7 +227,6 @@
                         <ul class="list-unstyled text-small">
                         <li><a class="link-secondary text-decoration-none" href="/">Inicio</a></li>
                         <li><a class="link-secondary text-decoration-none" href="/prueba">Probar modelo</a></li>
-                        <li><a class="link-secondary text-decoration-none" href="/datos">Ver datos</a></li>
                         </ul>
                 </div>
                 <div class="col-6 col-md">
