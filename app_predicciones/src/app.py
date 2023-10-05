@@ -440,6 +440,7 @@ def index():
         'IFecha': Ifecha,
         'HHora':Hhora
         }
+        
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     #return "<h2> {%lista%} </h2>"
@@ -447,6 +448,7 @@ def index():
     precipitaciones = con_bd['Datos']
     # Limita la consulta a los últimos 10 registros
     PrecipitacionesRegistradas = precipitaciones.find().sort("_id", -1).limit(10)
+    
 
     return render_template('index.html',Predicciones=resultadosDb,precipitaciones=PrecipitacionesRegistradas)
 
@@ -819,15 +821,8 @@ def datos():
     precipitaciones = con_bd['Datos']
     # Limita la consulta a los últimos 10 registros
     PrecipitacionesRegistradas = precipitaciones.find()
-    FeyHo = pd.read_csv('./src/fechayhora/FechayHora.csv', header=None, skiprows=1)
-    Ffecha = FeyHo.iloc[-1,0]
-    Ifecha = FeyHo.iloc[0,0]
-    Fechas = {
-        'FFecha': Ffecha,
-        'IFecha': Ifecha
-        }
 
-    return render_template('datos.html', precipitaciones=PrecipitacionesRegistradas, IFFecha=Fechas)
+    return render_template('datos.html', precipitaciones=PrecipitacionesRegistradas)
 
 #Ruta para la pantalla de datos donde se muestra la data consultada
 @app.route('/fechaBuscada',methods = ['POST'])
@@ -837,6 +832,7 @@ def Read():
     query={"fecha":fechabuscada}
     PrecipitacionesRegistradas=precipitaciones.find(query)
     return render_template('datos.html', precipitaciones = PrecipitacionesRegistradas)
+
 
 
 # inicializacion de una variable publica que captura el archivo inserttado por el usuario
@@ -855,19 +851,23 @@ def Mcorrelacion():
     plt.show()
     return redirect(url_for('index'))
 
-
-# Creación de un Grafico de todas las variables con el archivo subido por el usuario
-@app.route('/GraficoDT')
-def GraficoDT():
-    ArchivoG.hist()
-    plt.savefig("./src/Archivos img/GraficoDT.jpg")
+# Creación de un Grafico de Matriz de correlacion con el archivo de la DB MONGO
+@app.route('/McorrelacionMongo')
+def McorrelacionMongo():
+    DFMONGO=pd.read_csv("./src/ArchivoCSV_Mongo/filename.csv", header=None, skiprows=1)
+    correlation_matrix = DFMONGO.corr()
+# Creación de un mapa de calor de la matriz de correlación
+    plt.figure(figsize=(10, 8))  # Tamaño de la figura
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=.5)
+    plt.title("Matriz de Correlación")
+    plt.savefig("./src/IMG MONGO/GraficoMC.jpg")
     plt.show()
     return redirect(url_for('index'))
+
 
 # Control del error 404
 def error_404(error):
     return render_template('error_404.html'), 404
-
 
 
 if __name__ == '__main__':
