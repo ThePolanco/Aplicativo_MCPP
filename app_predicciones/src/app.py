@@ -832,7 +832,17 @@ def Read():
     query={"fecha":fechabuscada}
     PrecipitacionesRegistradas=precipitaciones.find(query)
     return render_template('datos.html', precipitaciones = PrecipitacionesRegistradas)
+    
 
+"""#Ruta para la pantalla de CRUD de Mongo donde se muestra la data consultada
+@app.route('/fechaDBBuscada',methods = ['POST'])
+def fechaDBBuscada():
+    precipitaciones = con_bd['Datos']
+    fechabuscada = request.form['fecha']
+    query={"fecha":fechabuscada}
+    PrecipitacionesRegistradas=precipitaciones.find(query)
+    return render_template('datos.html', precipitaciones = PrecipitacionesRegistradas)"""
+    
 
 
 # inicializacion de una variable publica que captura el archivo inserttado por el usuario
@@ -863,6 +873,159 @@ def McorrelacionMongo():
     plt.savefig("./src/IMG MONGO/GraficoMC.jpg")
     plt.show()
     return redirect(url_for('index'))
+
+# Ruta para Login 
+@app.route('/login')
+def usuario():
+    return render_template('login.html')
+
+#Validación de usuario
+@app.route('/validar', methods = ['POST'])
+def validar():
+    # Obtener datos del formulario
+    usuario = request.form['usuario']
+    password = request.form['password']
+    
+    # Realizar la búsqueda en la base de datos para verificar la autenticación
+    usuarios = con_bd['Usuarios']
+    user_data = usuarios.find_one({"usuario": usuario,"password": password})
+    
+    if user_data:
+        # Autenticación exitosa, redirigir a una página de éxito
+        return redirect(url_for('inicioDB'))
+    else:
+        # Autenticación fallida, mostrar un mensaje de error
+        return "Error de autenticación, Contraseña incorrecta"
+
+
+@app.route('/inicioDB')
+def inicioDB():
+    # Se modifica la vista index para poder hacer el muestreo de los datos
+    precipitaciones = con_bd['Datos']
+    PrecipitacionesRegistradas=precipitaciones.find().sort('fecha', -1).limit(10)
+    return render_template('inicioDB.html', precipitaciones = PrecipitacionesRegistradas)
+
+# Ruta para guardar los datos de la DB
+@app.route('/guardar_datos', methods = ['POST'])
+def agregarDatos():
+    precipitaciones= con_bd['Datos']
+    fecha = request.form['fecha']
+    hora = request.form['hora']
+    Po = request.form['Po']
+    T = request.form['T']
+    U= request.form['U']
+    Ff = request.form['Ff']
+    RRR= request.form['RRR']
+
+    Po = float(Po)
+    T = float(T)
+    U= float(U)
+    Ff = float(Ff)
+
+    
+
+    if fecha and hora and Po and T and U and Ff and RRR:
+        precipitacion = Precipitacion(fecha, hora, Po,T,U,Ff,RRR)
+        #insert_one para crear un documento en Mongo
+        precipitaciones.insert_one(precipitacion.formato_doc())
+        return redirect(url_for('inicioDB'))
+    else:
+        return "Error"
+    
+
+# En este caso se eliminara atravez de la URL
+# Ruta para eliminar datos en la DB donde la ruta se llama eliminar_persona y recibe un parametro llamado nombre_persona
+@app.route('/eliminar_fecha/<string:fecha_Precipitacion>')
+def eliminar(fecha_Precipitacion):
+    precipitaciones = con_bd['Datos']
+    # Se hace uso de delete_one para borrar los datos de la DB datos donde el dato que se elimina es el que se para como argumento para nombre
+    precipitaciones.delete_one({ 'fecha': fecha_Precipitacion})
+    # Creamos un redireccionamiento que redirija a la vista index
+    return redirect(url_for('inicioDB'))
+
+#Editar o actualizar el contenido 
+@app.route('/editar_dato/<string:fecha_Precipitacion>', methods = ['POST'])
+def editar(fecha_Precipitacion):
+    precipitaciones = con_bd['Datos']
+    # Se realiza el mismo proceso de inserción y extracción para poder actualizar los datos
+    fecha = request.form['fecha']
+    hora = request.form['hora']
+    Po = request.form['Po']
+    T = request.form['T']
+    U= request.form['U']
+    Ff = request.form['Ff']
+    RRR= request.form['RRR']
+
+    Po = float(Po)
+    T = float(T)
+    U= float(U)
+    Ff = float(Ff)
+
+    # Utilizaremos la función update_one()
+    if fecha and hora and Po and T and U and Ff and RRR:
+        precipitaciones.update_one({'fecha': fecha_Precipitacion}, 
+                            {'$set': {'fecha' : fecha , 'hora': hora, 'Po': Po,'T': T ,'U': U ,'Ff': Ff ,'RRR': RRR}}) # update_one() necesita de al menos dos parametros para funcionar
+        return redirect(url_for('inicioDB'))
+    else:
+        return "Error de actualización"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Control del error 404
