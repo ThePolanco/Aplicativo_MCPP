@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" tydive="text/css" href="static/css/estilos2.css">
+    <link rel="stylesheet" tydive="text/css" href="static/css/estilos.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "icon" href="{{ url_for('static', filename = 'img/icono.icon') }}">
     <title>Probar modelo</title>
@@ -16,9 +16,9 @@
                 <div class="container-fluid">
                     <img class="escudo" 
                         src="{{ url_for('static', filename = 'img/MCPP.png') }}" 
-                        alt="UdeC Simbolo 1" 
+                        alt="Logo" 
                         style="display: inline-block; max-width: 5%; height: auto;">
-                    <h1 class="display-5 text-center" style="color: white;">¡Prueba el algoritmo MCPP!</h1>
+                    <abbr title="Modelo Comparativo Predictivo de Precipitaciones"><h1 class="display-5 text-center" style="color: white;">¡Bienvenido al modelo MCPP!</h1></abbr>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -32,8 +32,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="/prueba">Probar modelo</a>
                                 </li>
+                            
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/login">Login</a>
+                                <a class="nav-link" href="/login">Administrador</a>
                                 </li>
                             </ul>
                         </ul>
@@ -81,12 +82,13 @@
                         <ul class="list-unstyled text-small">
                         <li><a class="link-secondary text-decoration-none" href="/">Inicio</a></li>
                         <li><a class="link-secondary text-decoration-none" href="/prueba">Probar modelo</a></li>
-                        <li><a class="link-secondary text-decoration-none" href="/login">Login</a></li>
+                        <li><a class="link-secondary text-decoration-none" href="/login">Administrador</a></li>
                         </ul>
                 </div>
                 <div class="col-6 col-md">
                     <h5>Recursos</h5>
                         <ul class="list-unstyled text-small">
+                        <li><a class="link-secondary text-decoration-none" href="#">Manual de usuario</a></li>
                         <li><a class="link-secondary text-decoration-none" href="#">Documentación</a></li>
                         <li><a class="link-secondary text-decoration-none" href="#">Articulo modelos</a></li>
                         </ul>

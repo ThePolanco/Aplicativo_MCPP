@@ -3,7 +3,7 @@
 <head>
     <script src="../assets/js/color-modes.js"></script>
     <meta charset="UTF-8">
-    <link rel="stylesheet" tydive="text/css" href="static/css/estilos2.css">
+    <link rel="stylesheet" tydive="text/css" href="static/css/estilos.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "icon" href="{{ url_for('static', filename = 'img/icono.icon') }}">
     <title>Predicción de precipitaciones</title>
@@ -36,7 +36,7 @@
                                 </li>
                             
                                 <li class="nav-item">
-                                <a class="nav-link" href="/login">Login</a>
+                                <a class="nav-link" href="/login">Administrador</a>
                                 </li>
                             </ul>
                         </ul>
@@ -143,29 +143,25 @@
         <div class="contenedor_datos">
             <div class="area_historico">
                     <article class="zona_graficos">
-                        <br>
-                        <br>
-                        <br>
-                        <br>
+                        
                         <h3 class="titulo">Filtro de predicciones por fecha</h3>
                             <form action = "/fechaBuscada" method = "post">
                                 <input type="text" name="fecha" placeholder="AAAA-MM-DD">
                                 <button type = "submit">Buscar</button>
                             </form>
                         <br>
-                        <h6>Tiempo en algunas de las ciudades "Mayores" de Colombia</h6>
+                        <h3>Matriz de correlación de los datos actuales</h3>
+                        <button class="btn btn-success" type="submit"name="MatrizCorrelación" onclick="location.href='/Mcorrelacion'">Matriz de correlación</button>
+                        <br><br>
+                        <h5>Tiempo en algunas de las ciudades "Mayores" de Colombia</h5>
                         <!--Ciudades mayores de colombia segun DNP:https://2022.dnp.gov.co/Paginas/DNP-definió-seis-categorías-de-ciudades-colombianas-de-acuerdo-a-la-edad-de-sus-habitantes.aspx#:~:text=Bogotá%2C%20Pereira%2C%20Manizales%20y%20Tunja,categorizadas%20como%20ciudades%20%27embrionarias%27. -->
                         <div id="idf2f9df539898d" a='{"t":"b","v":"1.2","lang":"es","locs":[349,350,3866,3859,3860],"ssot":"c","sics":"ds","cbkg":"#616161","cfnt":"#FFFFFF","ceb":"#FFFFFF","cef":"#000000","slfs":20,"slbr":1,"slmw":300}'><a href="https://sharpweather.com/es/widgets/">HTML Widget tiempo</a> para el sitio web de sharpweather.com</div><script async src="https://static1.sharpweather.com/widgetjs/?id=idf2f9df539898d"></script>
-                        <br>
-                        <br>
-                        <button class="btn btn-success" type="submit"name="MatrizCorrelación" onclick="location.href='/Mcorrelacion'">matriz de Correlación</button>
-                        
                     </article>
             </div>
             <div class="area_graficos">
                 <article>
                     <section class="zona_historico">
-                        <h2 class="titulo">Ultimos diez datos utilizados para las predicciones</h2>
+                        <h2 class="titulo">Ultimos 10 datos utilizados para las predicciones</h2>
                         <h7 class="titulo">Los datos estan tomados desde: {{Predicciones.IFecha}} hasta: {{Predicciones.FFecha}}</h7>
                         
                         <!--
@@ -232,7 +228,7 @@
                         <ul class="list-unstyled text-small">
                         <li><a class="link-secondary text-decoration-none" href="/">Inicio</a></li>
                         <li><a class="link-secondary text-decoration-none" href="/prueba">Probar modelo</a></li>
-                        <li><a class="link-secondary text-decoration-none" href="/login">Login</a></li>
+                        <li><a class="link-secondary text-decoration-none" href="/login">Administrador</a></li>
                         </ul>
                 </div>
                 <div class="col-6 col-md">
