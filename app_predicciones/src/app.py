@@ -902,7 +902,7 @@ def validar():
 def inicioDB():
     # Se modifica la vista index para poder hacer el muestreo de los datos
     precipitaciones = con_bd['Datos']
-    PrecipitacionesRegistradas=precipitaciones.find().sort('fecha', -1).limit(10)
+    PrecipitacionesRegistradas=precipitaciones.find().sort('fecha', -1).limit(30)
     return render_template('inicioDB.html', precipitaciones = PrecipitacionesRegistradas)
 
 # Ruta para guardar los datos de la DB
