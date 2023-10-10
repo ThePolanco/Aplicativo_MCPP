@@ -75,43 +75,65 @@ body{
     border-radius: 5px;
 }
 
-/* Estilos de pantalla datos */
+/* Estilos de apartado datos */
 .contenedor_datos {
+    padding: 15px;
+    background-color: #f0f0f0;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.titulo{
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+
+th {
+    border: 1px solid #000; 
+    padding: 8px;
+    text-align: center; 
+}
+
+td {
+    border: 1px solid #000; 
+    border-right: 1px solid #000;
+    padding: 8px;
+    text-align: center;
+}
+
+.matriz{
+    text-align: center;
+}
+
+/* Estilos de apartado info */
+.contenedor_info{
     text-align: center;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin: 20px;
     flex-grow: 1;
-    padding: 15px; 
+    padding: 15px;  
 }
 
-.area_historico{
-    background-image: url('https://images.unsplash.com/photo-1517685352821-92cf88aee5a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80');
-    background-size: cover;
-    background-attachment: fixed;
-    flex-basis: calc(30% - 10px);
-    padding: 10px;
-    background-color: #ffffff;
+.area_info, .area_info2 {
+    flex-basis: calc(50% - 10px);
+    padding: 0;
+    background-color: rgba(255, 255, 255, 0.5);
     margin-bottom: 20px;
     box-sizing: border-box;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     border-radius: 5px;
+    color: #000;
 }
 
-.area_graficos {
-    flex-basis: calc(70% - 10px);
-    padding: 10px;
-    background-color: #ffffff;
-    margin-bottom: 20px;
-    box-sizing: border-box;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-}
 
-.emer{
-    text-decoration: none;
-}
 
 /* Estilos de pantalla prueba */
 .prueba{
@@ -284,16 +306,17 @@ footer.container {
 /* Estilos para pantallas pequeñas */
 @media screen and (max-width: 768px) {
     .contenedor, .contenedor_2,
-    .contenedor_404,
-    .contenedor_datos, .contenedor_test,
-    .contenedor_result{
+    .contenedor_404, 
+    .contenedor_test,
+    .contenedor_result,
+    .contenedor_info {
         flex-direction: column;
     }
 
     .area_1, .area_2,
-    .button1, .button2,
+    .button1, .contenedor_datos,
     .area_404, 
-    .area_historico, .area_graficos, 
+    .area_info, .area_info2, 
     .area_modelo, .area_modelo1, .area_modelo2, .area_modelo3, .area_modelo4, 
     .area_subir, .muestra{
         flex-basis: 100%;
