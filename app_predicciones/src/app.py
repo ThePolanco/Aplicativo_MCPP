@@ -447,7 +447,7 @@ def index():
     #Visualización de los ultimos diez datos utilizados en laas predicciones
     precipitaciones = con_bd['Datos']
     # Limita la consulta a los últimos 10 registros
-    PrecipitacionesRegistradas = precipitaciones.find().sort("_id", -1).limit(10)
+    PrecipitacionesRegistradas = precipitaciones.find()
     
 
     return render_template('index.html',Predicciones=resultadosDb,precipitaciones=PrecipitacionesRegistradas)
@@ -815,33 +815,15 @@ def procesoAlgoritmo():
 
 #*******************************************************************
 con_bd = Conexion()
-#Ruta para la pantalla de datos donde se muestra toda la Data
-@app.route('/datos')
-def datos():
-    precipitaciones = con_bd['Datos']
-    # Limita la consulta a los últimos 10 registros
-    PrecipitacionesRegistradas = precipitaciones.find()
 
-    return render_template('datos.html', precipitaciones=PrecipitacionesRegistradas)
-
-#Ruta para la pantalla de datos donde se muestra la data consultada
-@app.route('/fechaBuscada',methods = ['POST'])
-def Read():
-    precipitaciones = con_bd['Datos']
-    fechabuscada = request.form['fecha']
-    query={"fecha":fechabuscada}
-    PrecipitacionesRegistradas=precipitaciones.find(query)
-    return render_template('datos.html', precipitaciones = PrecipitacionesRegistradas)
-    
-
-"""#Ruta para la pantalla de CRUD de Mongo donde se muestra la data consultada
+#Ruta para la pantalla de CRUD de Mongo donde se muestra la data consultada
 @app.route('/fechaDBBuscada',methods = ['POST'])
 def fechaDBBuscada():
     precipitaciones = con_bd['Datos']
     fechabuscada = request.form['fecha']
     query={"fecha":fechabuscada}
     PrecipitacionesRegistradas=precipitaciones.find(query)
-    return render_template('datos.html', precipitaciones = PrecipitacionesRegistradas)"""
+    return render_template('datos.html', precipitaciones = PrecipitacionesRegistradas)
     
 
 

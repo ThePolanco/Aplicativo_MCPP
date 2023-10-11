@@ -47,31 +47,31 @@
             <form class="registros" action="/guardar_datos" method="post">
                 <div class="form-group small-input">
                     <label for="fecha">Fecha</label>
-                    <input type="text" class="input-field" id="fecha" name="fecha" placeholder="AAAA-MM-DD">
+                    <input type="text" class="input-field" id="fecha" name="fecha" placeholder="AAAA-MM-DD" required>
                 </div>
                 <div class="form-group small-input">
                     <label for="hora">Hora</label>
-                    <input type="text" class="input-field" id="hora" name="hora" placeholder="00:00:00">
+                    <input type="text" class="input-field" id="hora" name="hora" placeholder="00:00:00" required>
                 </div>
                 <div class="form-group">
                     <label for="Po">Presión</label>
-                    <input type="text" class="input-field" id="Po" name="Po" placeholder="Po">
+                    <input type="text" class="input-field" id="Po" name="Po" placeholder="Po" required>
                 </div>
                 <div class="form-group">
                     <label for="T">Temperatura</label>
-                    <input type="text" class="input-field" id="T" name="T" placeholder="T">
+                    <input type="text" class="input-field" id="T" name="T" placeholder="T" required>
                 </div>
                 <div class="form-group">
                     <label for="U">Humedad</label>
-                    <input type="text" class="input-field" id="U" name="U" placeholder="U">
+                    <input type="text" class="input-field" id="U" name="U" placeholder="U" required>
                 </div>
                 <div class="form-group">
                     <label for="Ff">Vel. viento</label>
-                    <input type="text" class="input-field" id="Ff" name="Ff" placeholder="Ff">
+                    <input type="text" class="input-field" id="Ff" name="Ff" placeholder="Ff" required>
                 </div>
                 <div class="form-group">
                     <label for="RRR">Precipitación</label>
-                    <input type="number" class="input-field" id="RRR" name="RRR" placeholder="RRR" step="1" min="0" max="1">
+                    <input type="number" class="input-field" id="RRR" name="RRR" placeholder="RRR" step="1" min="0" max="1" required>
                 </div>
                 <div class="boton">
                     <button type="submit" class="btn btn-primary">Guardar</button>
@@ -84,19 +84,19 @@
             {% for precipitacion in precipitaciones %}
             <form action="/editar_dato/{{ precipitacion.fecha }}" method="post">
                 <h4>Fecha</h4>
-                <input type="text" class="input-field" name="fecha" value="{{ precipitacion.fecha }}">
+                <input type="text" class="input-field" name="fecha" value="{{ precipitacion.fecha }}" required>
                 <h4>Hora</h4>
-                <input type="text" class="input-field" name="hora" value="{{ precipitacion.hora }}">
+                <input type="text" class="input-field" name="hora" value="{{ precipitacion.hora }}" required>
                 <h4>Po</h4>
-                <input type="text" class="input-field" name="Po" value="{{ precipitacion.Po }}">
+                <input type="text" class="input-field" name="Po" value="{{ precipitacion.Po }}" required>
                 <h4>T</h4>
-                <input type="text" class="input-field" name="T" value="{{ precipitacion.T }}">
+                <input type="text" class="input-field" name="T" value="{{ precipitacion.T }}" required>
                 <h4>U</h4>
-                <input type="text" class="input-field" name="U" value="{{ precipitacion.U }}">
+                <input type="text" class="input-field" name="U" value="{{ precipitacion.U }}" required>
                 <h4>Ff</h4>
-                <input type="text" class="input-field" name="Ff" value="{{ precipitacion.Ff }}">
+                <input type="text" class="input-field" name="Ff" value="{{ precipitacion.Ff }}" required>
                 <h4>RRR</h4>
-                <input type="number" class="input-field" name="RRR" value="{{ precipitacion.RRR }}">
+                <input type="number" class="input-field" name="RRR" value="{{ precipitacion.RRR }}" required>
                 <br>
                 <button type="submit" class="btn btn-primary">Actualizar</button>
                 <br>
