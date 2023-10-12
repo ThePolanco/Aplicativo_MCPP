@@ -10,7 +10,8 @@ body{
 
 /**Estilos barra de navegación**/
 .navbar{
-    background-color: #072146;
+    background: rgb(44,80,158);
+    background: linear-gradient(0deg, rgba(44,80,158,1) 0%, rgba(8,35,74,1) 50%);
     font-size: 20px;
 }
 
@@ -299,7 +300,8 @@ form {
 /* Estilos del footer */
 footer.container {
     max-width: 100%;
-    background-color: #072146;
+    background: rgb(44,80,158);
+    background: linear-gradient(0deg, rgba(44,80,158,1) 0%, rgba(8,35,74,1) 50%);
     color: white;
 }
 
