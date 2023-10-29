@@ -5,8 +5,6 @@ https://www.google.com/search?q=como+exportar+datos+de+mongodb+a+una+archivo+csv
 https://xrnogales.medium.com/exportando-datos-a-csv-excel-desde-mongodb-con-python-f58db58e764f
 
 '''
-
-
 import os
 # Importar Flask y request
 from flask import Flask, render_template, request, redirect, url_for
@@ -14,8 +12,6 @@ from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 from config import *
 from precipitacion import Precipitacion
-#
-
 
 import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
@@ -36,7 +32,6 @@ from matplotlib import colors
 from sklearn.naive_bayes import GaussianNB
 from sklearn.feature_selection import SelectKBest
 
-
 # Creación de la aplicación
 app = Flask(__name__)
 # Carpeta de subida del archivo
@@ -45,7 +40,7 @@ app.config['UPLOAD_FOLDER'] = './src/Archivos csv'
 # Ruta para el index
 @app.route('/')
 def index():
-    # predicciones con el nuevo modelo con recolección de datos desde una DB Remota de mongo
+    # Predicciones con el nuevo modelo con recolección de datos desde una DB Remota de mongo
 
     mongo_uri = f'mongodb+srv://Lupo:precipitacionUDEC@cluster0.0s3yt3s.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp' # Your connection uri
     client = MongoClient(mongo_uri)
@@ -54,7 +49,7 @@ def index():
     collection = db.get_collection('Datos')
     # Obtener un df con la colección completa:
     df = pd.DataFrame(list(collection.find()))
-    #Eliminar parametros innecesarios
+    # Eliminar parametros innecesarios
     df.drop('fecha', inplace=True, axis=1)
     df.drop('hora', inplace=True, axis=1)
     df.drop('_id', inplace=True, axis=1)
@@ -62,7 +57,7 @@ def index():
     df.to_csv('./src/ArchivoCSV_Mongo/filename.csv', index=False)
 
     
-    # Se carga el conjunto de datos spam.data 
+# Se carga el conjunto de datos spam.data 
 ## sep== separacion por comas
 ## Header== no tiene
     df=pd.read_csv("./src/ArchivoCSV_Mongo/filename.csv", header=None, skiprows=1)
@@ -79,7 +74,6 @@ def index():
     XRF_train, XRF_test, YRF_train, YRF_test = train_test_split(XRF_normalizada,YRF, test_size=0.2, random_state=1)
 
 #Random forest
-
     rf= RandomForestClassifier(n_estimators=1000,criterion='gini',max_depth=1000,min_samples_split=3,min_samples_leaf=1,min_weight_fraction_leaf=0.0,max_features='sqrt',max_leaf_nodes=10,min_impurity_decrease=0.0,bootstrap=True,oob_score=False,n_jobs=-1,random_state=1,verbose=0,warm_start=False,ccp_alpha=0.0,max_samples=10)
     # Ajustar parametros de regresión lineal de datos
     rf.fit(XRF_train,YRF_train)
@@ -89,19 +83,17 @@ def index():
 #Indice de ocurrencia
     ocurrenciaRF=accuracy_score(YRF_test, YRF_prdss)
 
-
-# se crea un dataframe para comparar con lso valores reales
+# Se crea un dataframe para comparar con los valores reales
 
     rtaRF = pd.DataFrame({'real': YRF_test,'predicciones': YRF_prdss})
 
-
     lista=[YRF_test]
 
-    # *******************************************************
+# *******************************************************
 # Support Vector Machines
     datos=pd.read_csv('./src/ArchivoCSV_Mongo/filename.csv', header=None, skiprows=1)
 
-# separa los datos en "XMVS" y en "YMVS"
+# Separa los datos en "XMVS" y en "YMVS"
 # "XMVS" representa todas las columnas menos la ultima la cual es la de respuesta
 # "YMVS" representa la columna de respuesta
     XMVS = datos.iloc[:,:-1]
@@ -113,7 +105,6 @@ def index():
     clf = SVC(kernel = 'linear').fit(XMVS_train, YMVS_train)
     ocurrenciaMVS=clf.score(XMVS_test, YMVS_test)
 
-
     YMVS_pred = clf.predict(XMVS_test)
 
 # Calculo de la matriz de correlación
@@ -121,18 +112,13 @@ def index():
 
     RTAMVS = pd.DataFrame({'Real': YMVS_test,'Predicho': YMVS_pred})
 
-
 # *********************************************
-
-
 
 # Modelo Naive Bayes
 
-
-# separa los datos en "XNV" y en "Y"
+# Separa los datos en "XNV" y en "Y"
 # "XNV" representa todas las columnas menos la ultima la cual es la de respuesta
 # "Y" representa la columna de respuesta
-
 
     df_data = pd.read_csv('./src/ArchivoCSV_Mongo/filename.csv', header=None, skiprows=1)
 
@@ -176,7 +162,8 @@ def index():
         'prediccionesNV':y_pred,
         'PorcentajeNV':ocurrenciaNV
         }
-    #Comparacion de los modelos con el modelo Lupo
+
+# Comparacion de los modelos con el modelo Lupo
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     #Guardar la cantidad de resultados generados por los algoritmos
     TamaA=len(YRF_prdss)
@@ -365,8 +352,8 @@ def index():
         else:
             print("No concuerda el valor")
         ni=ni+1
-    #Utilizacion del documento para extraer datos de fecha y hora
-    # predicciones con el nuevo modelo con recolección de datos desde una DB Remota de mongo
+    # Utilizacion del documento para extraer datos de fecha y hora
+    # Predicciones con el nuevo modelo con recolección de datos desde una DB Remota de mongo
     BusquedaMongo = f'mongodb+srv://Lupo:precipitacionUDEC@cluster0.0s3yt3s.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp' # Your connection uri
     cliente = MongoClient(BusquedaMongo)
     # Se utiliza una base de datos de prueba con solo valores numericos
@@ -381,9 +368,9 @@ def index():
     DataF.drop('RRR', inplace=True, axis=1)
     DataF.drop('_id', inplace=True, axis=1)
     DataF.to_csv('./src/fechayhora/FechayHora.csv', index=False)
-    #Ocurrencia de Lupo
+    # Ocurrencia de Lupo
     ocurrenciaLupo=accuracy_score(YMVS_test, lupo)
-    #muestreo de datos del ultimo dato
+    # Muestreo de datos del ultimo dato
     FeyHo = pd.read_csv('./src/fechayhora/FechayHora.csv', header=None, skiprows=1)
     Ffecha = FeyHo.iloc[-1,0]
     Hhora = FeyHo.iloc[-1,1]
@@ -443,8 +430,8 @@ def index():
         
 
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    #return "<h2> {%lista%} </h2>"
-    #Visualización de los ultimos diez datos utilizados en laas predicciones
+    # Return "<h2> {%lista%} </h2>"
+    # Visualización de los ultimos diez datos utilizados en laas predicciones
     precipitaciones = con_bd['Datos']
     # Limita la consulta a los últimos 10 registros
     PrecipitacionesRegistradas = precipitaciones.find()
@@ -462,30 +449,28 @@ def index():
 def prueba():    
     return render_template('prueba.html')
 # Funcion para recibir el archivo y enviarlo a una carpeta llamada Archivos csv creada en la carpeta src
-#Aqui se hara todo el proceso para leer el archivo seleccionado y aplicaar los modelos
+# Aqui se hara todo el proceso para leer el archivo seleccionado y aplicaar los modelos
 @app.route('/RTA', methods=['POST'])
 def procesoAlgoritmo():
    if request.method == 'POST':
-  # obtenemos el archivo del input "archivo"
+  # Obtenemos el archivo del input "archivo"
     f = request.files['archivo']
     filename = secure_filename(f.filename)
   # Guardamos el archivo en el directorio "Archivos PDF"
     f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-
-
-#test_size- valor de entrenamiento
+# test_size- valor de entrenamiento
 
     traine=int(request.form['test_size'])
     trainee=traine*0.01
-# Random forest
-
+    
+    # Random forest
 
 # Se carga el conjunto de datos spam.data 
-## sep== separacion por comas
-## Header== no tiene
+# sep== separacion por comas
+# Header== no tiene
     df=pd.read_csv("./src/Archivos csv/archivo.csv", sep=',', header=None)
-# separa los datos en "XRF" y en "YRF"
+# Separa los datos en "XRF" y en "YRF"
 # "XRF" representa todas las columnas menos la ultima la cual es la de respuesta
 # "YRF" representa la columna de respuesta
     XRF = df.iloc[:,:-1]
@@ -530,8 +515,6 @@ def procesoAlgoritmo():
     YMVS = datos.iloc[:,-1]
     XMVS = datos.iloc[:,:-1]
 
-
-
 # División de los datos en un 80% para entrenamiento y un 20% para prueba
     XMVS_train,XMVS_test, YMVS_train, YMVS_test = train_test_split(XMVS, YMVS, test_size=trainee, random_state=42)
 
@@ -552,15 +535,12 @@ def procesoAlgoritmo():
 
 # *********************************************
 
-
-
 # Modelo Naive Bayes
 
 
 # separa los datos en "XNV" y en "Y"
 # "XNV" representa todas las columnas menos la ultima la cual es la de respuesta
 # "Y" representa la columna de respuesta
-
 
     df_data = pd.read_csv('./src/Archivos csv/archivo.csv', sep=',', header=None)
 
@@ -599,9 +579,7 @@ def procesoAlgoritmo():
     print(RTANV)
 
 
-
-
-    #Comparacion de los modelos con el modelo Lupo
+    # Comparacion de los modelos con el modelo Lupo
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     #Guardar la cantidad de resultados generados por los algoritmos
     TamaA=len(YRF_prdss)
@@ -825,11 +803,8 @@ def fechaDBBuscada():
     PrecipitacionesRegistradas=precipitaciones.find(query)
     return render_template('datos.html', precipitaciones = PrecipitacionesRegistradas)
     
-
-
-# inicializacion de una variable publica que captura el archivo inserttado por el usuario
+# Inicializacion de una variable publica que captura el archivo inserttado por el usuario
 ArchivoG=pd.read_csv('./src/Archivos csv/archivo.csv', sep=',', header=None)
-
 
 # Creación de un Grafico de Matriz de correlacion con el archivo subido por el usuario
 @app.route('/Mcorrelacion')
@@ -905,7 +880,6 @@ def agregarDatos():
     Ff = float(Ff)
 
     
-
     if fecha and hora and Po and T and U and Ff and RRR:
         precipitacion = Precipitacion(fecha, hora, Po,T,U,Ff,RRR)
         #insert_one para crear un documento en Mongo
@@ -914,7 +888,6 @@ def agregarDatos():
     else:
         return "Error"
     
-
 # En este caso se eliminara atravez de la URL
 # Ruta para eliminar datos en la DB donde la ruta se llama eliminar_persona y recibe un parametro llamado nombre_persona
 @app.route('/eliminar_fecha/<string:fecha_Precipitacion>')
@@ -925,7 +898,7 @@ def eliminar(fecha_Precipitacion):
     # Creamos un redireccionamiento que redirija a la vista index
     return redirect(url_for('inicioDB'))
 
-#Editar o actualizar el contenido 
+# Editar o actualizar el contenido 
 @app.route('/editar_dato/<string:fecha_Precipitacion>', methods = ['POST'])
 def editar(fecha_Precipitacion):
     precipitaciones = con_bd['Datos']
@@ -955,66 +928,11 @@ def editar(fecha_Precipitacion):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Control del error 404
 def error_404(error):
     return render_template('error_404.html'), 404
 
-
+# Ejecución del programa
 if __name__ == '__main__':
     app.register_error_handler(404, error_404)
     app.run(debug = True, port = 2023)
