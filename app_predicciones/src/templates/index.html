@@ -78,7 +78,10 @@
                             <div class="carousel-item active">
                                 <section class="area_model">
                                     <h4>Random Forest</h4>
+                                    <h4>accuracy</h4>
                                     <p class="porciento">{{ Predicciones.PorcentajeRF * 100 }}%</p>
+                                    <h4>F1 score</h4>
+                                    <p class="porciento">{{ Predicciones.Fl_RF * 100 }}%</p>
                                     <h5>Las predicciones son:</h5>
                                     <ul>
                                         <p>{{ Predicciones.prediccionesRF }}</p>
@@ -88,7 +91,10 @@
                             <div class="carousel-item">
                                 <section class="area_model">
                                     <h4></i>Máquina de Vector Soporte</i></h4>
+                                    <h4>accuracy</h4>
                                     <p class="porciento">{{ Predicciones.PorcentajeMVS * 100 }}%</p>
+                                    <h4>F1 score</h4>
+                                    <p class="porciento">{{ Predicciones.Fl_MVS * 100 }}%</p>
                                     <h5>Las predicciones son:</h5>
                                     <ul>
                                         <p>{{ Predicciones.prediccionesMVS }}</p>
@@ -98,7 +104,10 @@
                             <div class="carousel-item">
                                 <section class="area_model">
                                     <h4></i>Naive Bayes</h4>
+                                    <h4>accuracy</h4>
                                     <p class="porciento">{{ Predicciones.PorcentajeNV * 100 }}%</p>
+                                    <h4>F1 score</h4>
+                                    <p class="porciento">{{ Predicciones.Fl_NB * 100 }}%</p>
                                     <h5>Las predicciones son:</h5>
                                     <ul>
                                         <p>{{ Predicciones.prediccionesNV }}</p>
@@ -108,7 +117,10 @@
                             <div class="carousel-item">
                                 <section class="area_model">
                                     <h4></i>MCPP</h4>
+                                    <h4>accuracy</h4>
                                     <p class="porciento">{{ Predicciones.LupoOcurrencia * 100 }}%</p>
+                                    <h4>F1 score</h4>
+                                    <p class="porciento">{{ Predicciones.Fl_LUPO * 100 }}%</p>
                                     <h5>Las predicciones son:</h5>
                                     <ul>
                                         <p>{{ Predicciones.LupoRTA }}</p>
@@ -190,6 +202,8 @@
                 <div class="matriz">
                     <h4>Matriz de correlación de los datos actuales</h4>
                     <button class="btn btn-success" type="submit"name="MatrizCorrelación" onclick="location.href='/Mcorrelacion'">Matriz de correlación</button>
+                    <h4>Balance de los datos actuales</h4>
+                    <button class="btn btn-success" type="submit"name="BalanceMongoDB" onclick="location.href='/GbalanceMongo'">Balance de los datos</button>
                 </div>
             </div>
         </div>
