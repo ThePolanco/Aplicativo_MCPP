@@ -56,9 +56,9 @@
                     <section class="zona_1">
                         <h3 class="titulo">Predicción de la ultima cadena de datos ingresados</h3>
                         <br>
-                        <h5>Las predicciones de la fecha: {{Predicciones.FFecha}}</h5>
-                        <h5>En la hora: {{Predicciones.HHora}}</h5>
-                        <h5>Dicen que:</h5>
+                        <h4>Las predicciones de la fecha: {{Predicciones.FFecha}}</h4>
+                        <h4>En la hora: {{Predicciones.HHora}}</h4>
+                        <h4>Dicen que:</h4>
                         <h1 class="porciento">{{Predicciones.lluvia}}</h1>
                         <br>
                         <img class="escudo" 
@@ -71,16 +71,20 @@
             </div>
             <div class="area_2">
                 <article class="zona_2">
-                    <h3 class="titulo">Datos actualizados de predicciones segun el modelo:</h3>
+                    <h3 class="titulo">Actualización de predicciones segun el modelo:</h3>
                     
                     <div id="carouselExampleAutoplaying" class="carousel carousel-dark slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <section class="area_model">
-                                    <h4>Random Forest</h4>
-                                    <h4>accuracy</h4>
+                                    <h3 class="modelo">Random Forest</h3>
+                                    <abbr title="La exactitud mide cuántas predicciones acertadas realiza el modelo en comparación con el total de predicciones. Un valor alto indica que el modelo es confiable">
+                                        <h4>Exactitud de las Predicciones (Accuracy)</h4>
+                                    </abbr>
                                     <p class="porciento">{{ Predicciones.PorcentajeRF * 100 }}%</p>
-                                    <h4>F1 score</h4>
+                                    <abbr title="El F1 Score combina la precisión (cuántas predicciones son correctas) y la recuperación (cuántos resultados verdaderos se capturan). Un valor alto sugiere un equilibrio óptimo entre estos aspectos">
+                                        <h4>Puntuación de Precisión y Recuperación (F1 Score)</h4>
+                                    </abbr>
                                     <p class="porciento">{{ Predicciones.Fl_RF * 100 }}%</p>
                                     <h5>Las predicciones son:</h5>
                                     <ul>
@@ -90,10 +94,14 @@
                             </div>
                             <div class="carousel-item">
                                 <section class="area_model">
-                                    <h4></i>Máquina de Vector Soporte</i></h4>
-                                    <h4>accuracy</h4>
+                                    <h3 class="modelo"></i>Máquina de Vector Soporte</i></h3>
+                                    <abbr title="La exactitud mide cuántas predicciones acertadas realiza el modelo en comparación con el total de predicciones. Un valor alto indica que el modelo es confiable">
+                                        <h4>Exactitud de las Predicciones (Accuracy)</h4>
+                                    </abbr>
                                     <p class="porciento">{{ Predicciones.PorcentajeMVS * 100 }}%</p>
-                                    <h4>F1 score</h4>
+                                    <abbr title="El F1 Score combina la precisión (cuántas predicciones son correctas) y la recuperación (cuántos resultados verdaderos se capturan). Un valor alto sugiere un equilibrio óptimo entre estos aspectos">
+                                        <h4>Puntuación de Precisión y Recuperación (F1 Score)</h4>
+                                    </abbr>
                                     <p class="porciento">{{ Predicciones.Fl_MVS * 100 }}%</p>
                                     <h5>Las predicciones son:</h5>
                                     <ul>
@@ -103,10 +111,14 @@
                             </div>
                             <div class="carousel-item">
                                 <section class="area_model">
-                                    <h4></i>Naive Bayes</h4>
-                                    <h4>accuracy</h4>
+                                    <h3 class="modelo"></i>Naive Bayes</h3>
+                                    <abbr title="La exactitud mide cuántas predicciones acertadas realiza el modelo en comparación con el total de predicciones. Un valor alto indica que el modelo es confiable">
+                                        <h4>Exactitud de las Predicciones (Accuracy)</h4>
+                                    </abbr>
                                     <p class="porciento">{{ Predicciones.PorcentajeNV * 100 }}%</p>
-                                    <h4>F1 score</h4>
+                                    <abbr title="El F1 Score combina la precisión (cuántas predicciones son correctas) y la recuperación (cuántos resultados verdaderos se capturan). Un valor alto sugiere un equilibrio óptimo entre estos aspectos">
+                                        <h4>Puntuación de Precisión y Recuperación (F1 Score)</h4>
+                                    </abbr>
                                     <p class="porciento">{{ Predicciones.Fl_NB * 100 }}%</p>
                                     <h5>Las predicciones son:</h5>
                                     <ul>
@@ -116,10 +128,14 @@
                             </div>
                             <div class="carousel-item">
                                 <section class="area_model">
-                                    <h4></i>MCPP</h4>
-                                    <h4>accuracy</h4>
+                                    <h3 class="modelo"></i>MCPP</h3>
+                                    <abbr title="La exactitud mide cuántas predicciones acertadas realiza el modelo en comparación con el total de predicciones. Un valor alto indica que el modelo es confiable">
+                                        <h4>Exactitud de las Predicciones (Accuracy)</h4>
+                                    </abbr>
                                     <p class="porciento">{{ Predicciones.LupoOcurrencia * 100 }}%</p>
-                                    <h4>F1 score</h4>
+                                    <abbr title="El F1 Score combina la precisión (cuántas predicciones son correctas) y la recuperación (cuántos resultados verdaderos se capturan). Un valor alto sugiere un equilibrio óptimo entre estos aspectos">
+                                        <h4>Puntuación de Precisión y Recuperación (F1 Score)</h4>
+                                    </abbr>
                                     <p class="porciento">{{ Predicciones.Fl_LUPO * 100 }}%</p>
                                     <h5>Las predicciones son:</h5>
                                     <ul>
@@ -202,6 +218,7 @@
                 <div class="matriz">
                     <h4>Matriz de correlación de los datos actuales</h4>
                     <button class="btn btn-success" type="submit"name="MatrizCorrelación" onclick="location.href='/Mcorrelacion'">Matriz de correlación</button>
+                    <br><br>
                     <h4>Balance de los datos actuales</h4>
                     <button class="btn btn-success" type="submit"name="BalanceMongoDB" onclick="location.href='/GbalanceMongo'">Balance de los datos</button>
                 </div>
@@ -246,7 +263,6 @@
                         <ul class="list-unstyled text-small">
                         <li><a class="link-secondary text-decoration-none" href="#">Manual de usuario</a></li>
                         <li><a class="link-secondary text-decoration-none" href="#">Documentación</a></li>
-                        <li><a class="link-secondary text-decoration-none" href="#">Articulo modelos</a></li>
                         </ul>
                 </div>
                 <div class="col-6 col-md">

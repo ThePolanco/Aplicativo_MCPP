@@ -57,6 +57,13 @@ body{
     transform: scale(1.1); 
 }
 
+.modelo{
+    font-size: 30px;
+    color: #ffffff; 
+    font-weight: bold;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9); 
+}
+
 .contenedor_2{
     text-align: center;
     display: flex;

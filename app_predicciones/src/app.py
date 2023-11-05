@@ -36,7 +36,6 @@ app.config['UPLOAD_FOLDER'] = './src/Archivos csv'
 @app.route('/')
 def index():
     # Predicciones con el nuevo modelo con recolección de datos desde una DB Remota de mongo
-
     mongo_uri = f'mongodb+srv://Lupo:precipitacionUDEC@cluster0.0s3yt3s.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp' # Your connection uri
     client = MongoClient(mongo_uri)
     # Se utiliza una base de datos de prueba con solo valores numericos
@@ -51,7 +50,6 @@ def index():
     ## Exportar a CSV:
     df.to_csv('./src/ArchivoCSV_Mongo/filename.csv', index=False)
 
-    
 # Se carga el conjunto de datos spam.data 
 ## sep== separacion por comas
 ## Header== no tiene
@@ -458,8 +456,9 @@ def index():
 @app.route('/prueba')
 def prueba():    
     return render_template('prueba.html')
-# Funcion para recibir el archivo y enviarlo a una carpeta llamada Archivos csv creada en la carpeta src
-# Aqui se hara todo el proceso para leer el archivo seleccionado y aplicaar los modelos
+# Funcion para recibir el archivo y enviarlo a una carpeta llamada 
+# Archivos csv creada en la carpeta src
+# Aqui se hara todo el proceso para leer el archivo seleccionado y aplicar los modelos
 @app.route('/RTA', methods=['POST'])
 def procesoAlgoritmo():
    if request.method == 'POST':
@@ -468,9 +467,8 @@ def procesoAlgoritmo():
     filename = secure_filename(f.filename)
   # Guardamos el archivo en el directorio "Archivos PDF"
     f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-
+    
 # test_size- valor de entrenamiento
-
     traine=int(request.form['test_size'])
     trainee=traine*0.01
     
@@ -960,9 +958,6 @@ def editar(fecha_Precipitacion):
         return redirect(url_for('inicioDB'))
     else:
         return "Error de actualización"
-
-
-
 
 
 # Control del error 404
