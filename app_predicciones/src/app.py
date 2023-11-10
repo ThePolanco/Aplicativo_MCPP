@@ -900,8 +900,8 @@ def inicioDB():
             # Ajustar la consulta a la base de datos para obtener la cantidad de datos especificada
             PrecipitacionesRegistradas = precipitaciones.find().sort('fecha', -1).limit(cantidad_datos)
         else:
-            # Si no se envió el formulario, mostrar todos los registros
-            PrecipitacionesRegistradas = precipitaciones.find().sort('fecha', -1)
+            # Si no se envió el formulario, mostrar los últimos 50 registros por defecto
+            PrecipitacionesRegistradas = precipitaciones.find().sort('fecha', -1).limit(50)
 
         return render_template('inicioDB.html', precipitaciones=PrecipitacionesRegistradas)
     else:
