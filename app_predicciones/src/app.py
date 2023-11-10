@@ -1,11 +1,11 @@
 import os
 # Importar Flask y request
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for,session,flash
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 from config import *
 from precipitacion import Precipitacion
-
+from datetime import datetime
 import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -864,7 +864,7 @@ def GbalancenMongo():
     return redirect(url_for('index'))
 
 
-
+app.secret_key = 'modeloMCPPUDEC'
 
 # Ruta para Login 
 @app.route('/login')
@@ -872,30 +872,67 @@ def usuario():
     return render_template('login.html')
 
 #Validación de usuario
-@app.route('/validar', methods = ['POST'])
+@app.route('/validar', methods=['POST'])
 def validar():
-    # Obtener datos del formulario
     usuario = request.form['usuario']
     password = request.form['password']
-    
-    # Realizar la búsqueda en la base de datos para verificar la autenticación
+
     usuarios = con_bd['Usuarios']
-    user_data = usuarios.find_one({"usuario": usuario,"password": password})
-    
+    user_data = usuarios.find_one({"usuario": usuario, "password": password})
+
     if user_data:
-        # Autenticación exitosa, redirigir a una página de éxito
+        # Autenticación exitosa, almacenar el usuario en la sesión
+        session['usuario'] = usuario
         return redirect(url_for('inicioDB'))
     else:
-        # Autenticación fallida, mostrar un mensaje de error
-        return "Error de autenticación, Contraseña incorrecta"
+        flash('Error de autenticación, Usuario o Contraseña incorrecta', 'error')
+        return redirect(url_for('usuario'))
 
 
-@app.route('/inicioDB')
+@app.route('/inicioDB', methods=['GET', 'POST'])
 def inicioDB():
-    # Se modifica la vista index para poder hacer el muestreo de los datos
-    precipitaciones = con_bd['Datos']
-    PrecipitacionesRegistradas=precipitaciones.find().sort('fecha', -1).limit(30)
-    return render_template('inicioDB.html', precipitaciones = PrecipitacionesRegistradas)
+    if 'usuario' in session:
+        precipitaciones = con_bd['Datos']
+
+        if request.method == 'POST':
+            # Si se envió el formulario, obtener la cantidad de datos deseada
+            cantidad_datos = int(request.form.get('cantidadDatos', 30))
+            # Ajustar la consulta a la base de datos para obtener la cantidad de datos especificada
+            PrecipitacionesRegistradas = precipitaciones.find().sort('fecha', -1).limit(cantidad_datos)
+        else:
+            # Si no se envió el formulario, mostrar todos los registros
+            PrecipitacionesRegistradas = precipitaciones.find().sort('fecha', -1)
+
+        return render_template('inicioDB.html', precipitaciones=PrecipitacionesRegistradas)
+    else:
+        return redirect(url_for('usuario'))
+    
+
+@app.route('/buscar_por_fecha', methods=['POST'])
+def buscar_por_fecha():
+    if 'usuario' in session:
+        precipitaciones = con_bd['Datos']
+
+        fecha_busqueda = request.form.get('fechaBusqueda')
+
+        try:
+            # Ajustar la consulta para buscar registros con la fecha proporcionada
+            # en el formato que estás utilizando
+            PrecipitacionesRegistradas = precipitaciones.find({'fecha': fecha_busqueda}).sort('fecha', -1)
+        except ValueError:
+            flash('Formato de fecha incorrecto. Use el formato AAAA-MM-DD.', 'error')
+            return redirect(url_for('inicioDB'))
+
+        return render_template('inicioDB.html', precipitaciones=PrecipitacionesRegistradas)
+    else:
+        return redirect(url_for('usuario'))
+
+
+@app.route('/logout')
+def logout():
+    # Eliminar el usuario de la sesión y redirigir al login
+    session.pop('usuario', None)
+    return redirect(url_for('usuario'))
 
 # Ruta para guardar los datos de la DB
 @app.route('/guardar_datos', methods = ['POST'])

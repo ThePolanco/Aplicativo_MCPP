@@ -26,14 +26,7 @@
                         <ul class="navbar-nav ms-auto">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="/">Inicio</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/prueba">Probar modelo</a>
-                                </li>
-                            
-                                <li class="nav-item">
-                                <a class="nav-link" href="/login">Administrador</a>
+                                    <a class="nav-link active" href="{{ url_for('logout') }}">Cerrar sesión</a>
                                 </li>
                             </ul>
                         </ul>
@@ -81,6 +74,17 @@
 
         <h2 class="subtitle">Visualización de datos</h2>
         <div class="container">
+            <form action="{{ url_for('buscar_por_fecha') }}" method="post" class="form-inline">
+                <label for="fechaBusqueda">Buscar por fecha:</label>
+                <input type="text" id="fechaBusqueda" name="fechaBusqueda" class="form-control" placeholder="AAAA-MM-DD" required>
+                <button type="submit" class="btn btn-primary">Buscar</button>
+            </form>
+            
+            <form action="{{ url_for('inicioDB') }}" method="post" class="form-inline">
+                <label for="cantidadDatos">Mostrar n cantidad de registros:</label>
+                <input type="number" id="cantidadDatos" name="cantidadDatos" min="1" max="100" value="30" class="form-control" required>
+                <button type="submit" class="btn btn-primary">Mostrar</button>
+            </form>
             {% for precipitacion in precipitaciones %}
             <form action="/editar_dato/{{ precipitacion.fecha }}" method="post">
                 <h4>Fecha</h4>
@@ -113,14 +117,6 @@
                         style="max-width: 60%; height: auto;">
                     <br>
                     <small class="link-secondary text-decoration-none">&copy; 2023 - UdeC</small>
-                </div>
-                <div class="col-6 col-md">
-                    <h5>Funciones</h5>
-                        <ul class="list-unstyled text-small">
-                        <li><a class="link-secondary text-decoration-none" href="/">Inicio</a></li>
-                        <li><a class="link-secondary text-decoration-none" href="/prueba">Probar modelo</a></li>
-                        <li><a class="link-secondary text-decoration-none" href="/login">Administrador</a></li>
-                        </ul>
                 </div>
                 <div class="col-6 col-md">
                     <h5>Recursos</h5>
