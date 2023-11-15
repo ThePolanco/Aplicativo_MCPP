@@ -75,12 +75,14 @@
         <form action="{{ url_for('buscar_por_fecha') }}" method="post" class="form-inline">
             <label for="fechaBusqueda">Buscar por fecha:</label>
             <input type="text" id="fechaBusqueda" name="fechaBusqueda" class="form-control" placeholder="AAAA-MM-DD" required>
+            <br>
             <button type="submit" class="btn btn-primary">Buscar</button>
         </form>
         
         <form action="{{ url_for('inicioDB') }}" method="post" class="form-inline">
             <label for="cantidadDatos">Mostrar n cantidad de registros:</label>
             <input type="number" id="cantidadDatos" name="cantidadDatos" min="1" max="100" class="form-control" required>
+            <br>
             <button type="submit" class="btn btn-primary">Mostrar</button>
         </form>
 
@@ -121,10 +123,18 @@
                     <small class="link-secondary text-decoration-none">&copy; 2023 - UdeC</small>
                 </div>
                 <div class="col-6 col-md">
+                    <h5>Funciones</h5>
+                        <ul class="list-unstyled text-small">
+                        <li><a class="link-secondary text-decoration-none" href="/">Inicio</a></li>
+                        <li><a class="link-secondary text-decoration-none" href="/prueba">Probar modelo</a></li>
+                        <li><a class="link-secondary text-decoration-none" href="/login">Administrador</a></li>
+                        </ul>
+                </div>
+                <div class="col-6 col-md">
                     <h5>Recursos</h5>
                         <ul class="list-unstyled text-small">
-                        <li><a class="link-secondary text-decoration-none" href="#">Manual de usuario</a></li>
-                        <li><a class="link-secondary text-decoration-none" href="#">Documentación</a></li>
+                        <li><a class="link-secondary text-decoration-none" href="https://mailunicundiedu-my.sharepoint.com/:b:/g/personal/jspolanco_ucundinamarca_edu_co/Ea_26I2zgKBJlghD8gqMbZIBotHaOiX14R9BJDWmdb2bjQ?e=wAEnn5">Manual de usuario</a></li>
+                        <li><a class="link-secondary text-decoration-none" href="https://mailunicundiedu-my.sharepoint.com/:w:/g/personal/jspolanco_ucundinamarca_edu_co/EQfwONjM71NAl4OO0ObEooMBcmc-RK-vRj2kOHbnrhomEA">Documentación</a></li>
                         </ul>
                 </div>
                 <div class="col-6 col-md">
